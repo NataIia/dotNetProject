@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+}
+
+<div class="jumbotron">
+    <h1>@Resource.ProjectNaam</h1>
+</div>
+
+@using (Html.BeginForm("SetCulture", "Home")) //Html.BeginForm( action, controller, FormMethod, htmlAttributes )
+{
+    <input name="returnaction" id="returnaction" type="hidden" value="Index" /> <!--hidden form. return action is used in SetCulture method of BaseController.class-->
+    <fieldset>
+        <legend>@Resource.LanguageChoose</legend>
+        <div class="control-group">
+            <div class="controls">
+                <label for="en">
+                    <input name="culture" id="en" value="en" type="radio" @selected("en", culture) /> English
+                </label>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <label for="nl">
+                    <input name="culture" id="nl" value="nl" type="radio" @selected("nl", culture) /> Nederlands
+                </label>
+            </div>
+        </div>
+
+    </fieldset>
+}
+
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>@Resource.WelcomeTitel</h2>
+        <p>@Resource.WelcomeText</p>
+    </div>
+    <div class="col-md-4">
+        <h2>@Resource.InleidingTitel</h2>
+        <p>@Resource.InleidingText</p>
+        <ul>
+            <li>HTML</li>
+            <li>CSS layout</li>
+            <li>Javasript</li>
+            <li>JQuery</li>
+            <li>MVC</li>
+            <li>Entity Framework (code first)</li>
+            <li>UoW, IoC/DC (Unity)</li>
+            <li>G18N</li>
+            <li>Security</li>
+        </ul>
+    </div>
+    <div class="col-md-4">
+        <h2>@Resource.OmschrijvingTitel</h2>
+        <p>@Resource.OmschrijvingText</p>
+    </div>
+</div>
+
+@helper selected(string choice, string culture)
+{
+if (choice == culture)
+{
+        @:checked = "checked";
+        }
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        (function ($) {
+            $("input[type = 'radio']").click(function () {
+                $(this).parents("form").submit();
+            });
+
+        })(jQuery);
+    </script>
+}

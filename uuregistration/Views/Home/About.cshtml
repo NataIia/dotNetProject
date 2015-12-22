@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "Hardcoded login values";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>Een gebruiker moet steeds ingelogd zijn om uur registraties te beheren en of te factureren. Elke gebruiker is verbonden met een bepaalde rol die zal bepalen welke acties de gebruiker kan ondernemen. De volgende rollen kunnen aan een gebruiker worden toegewezen:</p>
+
+<table>
+    <thead id="table-users-about-tr">
+        <tr>
+            <td>Login</td>
+            <td>Password</td>
+            <td>Role</td>
+            <td>Description</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>departementadministrator@groept.be</td>
+            <td>GroeptT@2015</td>
+            <td>DEPARTEMENTADMINISTRATOR</td>
+            <td>
+                <ul>
+                    <li>
+                        Een departement administrator kan zijn uur registraties en die van zijn departement beheren. Dit wil zeggen:
+                        <ul>
+                            <li>Uur registraties ingeven voor zichzelf of voor een andere gebruiker van zijn departement</li>
+                            <li>Uur registraties van zichzelf of van zijn departement aanpassen. Dit is enkel mogelijk indien deze nog niet zijn gefactureerd!</li>
+                        </ul>
+                    </li>
+                    <li>Een departement administrator kan de uur registraties van zichzelf en van zijn departement factureren</li>
+                    <li>Een departement administrator kan klanten aanmaken voor zijn departement en deze aan gebruikers koppelen </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>administrator@groept.be</td>
+            <td>GroeptT@2015</td>
+            <td>ADMINISTRATOR</td>
+            <td>
+                <ul>
+                    <li>De departement administrator mogelijkheden</li>
+                    <li>
+                        Een administrator kan het systeem beheren en kan dus:
+                        <ul>
+                            <li>Alle gebruikers beheren (aanmaken / verwijderen / aanpassen)</li>
+                            <li>Alle klanten beheren</li>
+                            <li>Alle uur registraties beheren en factureren</li>
+                            <li>Type werk beheren</li>
+                        </ul>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>user@groept.be</td>
+            <td>GroeptT@2015</td>
+            <td>USER</td>
+            <td>Een user kan zijn eigen uur registraties beheren (aanmaken / aanpassen / verwijderen) en dit enkel voor de klanten waarmee hij verbonden is. Een user kan niet factureren. </td>
+        </tr>
+    </tbody>
+</table>
