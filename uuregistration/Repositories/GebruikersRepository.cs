@@ -60,12 +60,12 @@ namespace uuregistration.Repositories
 
             if (gebruiker.Id == default(int))
             {
-                gebruiker.UpdateRecords.Add(new Update(new Gebruiker(), Update.Type.GREATION, ""));
+//                gebruiker.UpdateRecords.Add(new Update(new Gebruiker(), Update.Type.GREATION, ""));
                 context.Gebruikers.Add(gebruiker);
             } //new gebruiker
             else
             {
-                gebruiker.UpdateRecords.Add(new Update(new Gebruiker(), Update.Type.UPDATE, ""));
+ //               gebruiker.UpdateRecords.Add(new Update(new Gebruiker(), Update.Type.UPDATE, ""));
                 context.Entry(gebruiker).State = EntityState.Modified;
             } //existing gebruiker
         }
