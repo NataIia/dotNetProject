@@ -219,8 +219,10 @@
     <Compile Include="Repositories\GebruikersRepository.cs" />
     <Compile Include="Repositories\IGebruikersRepository.cs" />
     <Compile Include="Repositories\IKlantenRepository.cs" />
+    <Compile Include="Repositories\IUurRegistratieRepository.cs" />
     <Compile Include="Repositories\KlantenRepository.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
+    <Compile Include="Repositories\UurRegistratieRepository.cs" />
     <Compile Include="Resources\Resource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -239,6 +241,7 @@
     <Compile Include="ViewModels\GebruikersIndexViewModel.cs" />
     <Compile Include="ViewModels\KlantenIndexViewModel.cs" />
     <Compile Include="ViewModels\RoleViewModel.cs" />
+    <Compile Include="ViewModels\UurRegistratieViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -322,6 +325,7 @@
     <Content Include="Views\UurRegistraties\Details.cshtml" />
     <Content Include="Views\UurRegistraties\Edit.cshtml" />
     <Content Include="Views\UurRegistraties\Index.cshtml" />
+    <Content Include="Views\UurRegistratieDetails\UurRegistratieDetailsLijstControl.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

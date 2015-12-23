@@ -47,13 +47,12 @@ namespace uuregistration.DataAccessLayer
 
             var uurRedistraries = new List<UurRegistratie>
             {
-                new UurRegistratie { Titel = "uur test1", Omschrijving = "uur omsch test1", Details = uurRegistratieDetails},
-                new UurRegistratie { Titel = "uur test2", Omschrijving = "uur omsch test2", Details = uurRegistratieDetails}
+                new UurRegistratie { Titel = "uur test1", Omschrijving = "uur omsch test1", Details = new List<UurRegistratieDetails>()},
+                new UurRegistratie { Titel = "uur test2", Omschrijving = "uur omsch test2", Details = new List<UurRegistratieDetails>()}
             };
 
             uurRedistraries.ForEach(u => context.UurenRegistratie.Add(u));
             context.SaveChanges();
-
         }
     }
 }

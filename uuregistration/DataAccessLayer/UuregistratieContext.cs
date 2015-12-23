@@ -17,12 +17,11 @@ namespace uuregistration.DataAccessLayer
         public DbSet<Klant> Klanten { get; set; }
         public DbSet<UurRegistratie> UurenRegistratie { get; set; }
         public DbSet<Factuur> Facturen { get; set; }
+        public DbSet<UurRegistratieDetails> UurRegistratieDetails { get; set; }
         //prevents table names from being pluralized
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
            {
                modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
            }
-
-        public System.Data.Entity.DbSet<uuregistration.Models.UurRegistratieDetails> UurRegistratieDetails { get; set; }
     }
 }
