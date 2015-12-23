@@ -35,6 +35,25 @@ namespace uuregistration.DataAccessLayer
             };
             klanten.ForEach(k => context.Klanten.Add(k));
             context.SaveChanges();
+
+            var uurRegistratieDetails = new List<UurRegistratieDetails>
+            {
+                new UurRegistratieDetails { StartTijd = new DateTime(2014, 1, 18), EindTijd = new DateTime(2014, 2, 18), TeFactureren = true},
+                new UurRegistratieDetails { StartTijd = new DateTime(2015, 1, 18), EindTijd = new DateTime(2015, 2, 18), TeFactureren = false},
+            };
+
+            uurRegistratieDetails.ForEach(ud => context.UurRegistratieDetails.Add(ud));
+            context.SaveChanges();
+
+            var uurRedistraries = new List<UurRegistratie>
+            {
+                new UurRegistratie { Titel = "uur test1", Omschrijving = "uur omsch test1", Details = uurRegistratieDetails},
+                new UurRegistratie { Titel = "uur test2", Omschrijving = "uur omsch test2", Details = uurRegistratieDetails}
+            };
+
+            uurRedistraries.ForEach(u => context.UurenRegistratie.Add(u));
+            context.SaveChanges();
+
         }
     }
 }

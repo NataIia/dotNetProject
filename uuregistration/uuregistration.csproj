@@ -195,6 +195,8 @@
     <Compile Include="Controllers\KlantsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\UurRegistratieDetailsController.cs" />
+    <Compile Include="Controllers\UurRegistratiesController.cs" />
     <Compile Include="DataAccessLayer\UuregistratieContext.cs" />
     <Compile Include="DataAccessLayer\UuregistratieInitialiser.cs" />
     <Compile Include="Global.asax.cs">
@@ -310,6 +312,16 @@
     <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Roles\Create.cshtml" />
     <Content Include="Views\Klants\KlantenLijstControl.cshtml" />
+    <Content Include="Views\UurRegistratieDetails\Create.cshtml" />
+    <Content Include="Views\UurRegistratieDetails\Delete.cshtml" />
+    <Content Include="Views\UurRegistratieDetails\Details.cshtml" />
+    <Content Include="Views\UurRegistratieDetails\Edit.cshtml" />
+    <Content Include="Views\UurRegistratieDetails\Index.cshtml" />
+    <Content Include="Views\UurRegistraties\Create.cshtml" />
+    <Content Include="Views\UurRegistraties\Delete.cshtml" />
+    <Content Include="Views\UurRegistraties\Details.cshtml" />
+    <Content Include="Views\UurRegistraties\Edit.cshtml" />
+    <Content Include="Views\UurRegistraties\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

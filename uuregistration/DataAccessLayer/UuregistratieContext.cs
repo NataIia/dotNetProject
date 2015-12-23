@@ -22,5 +22,7 @@ namespace uuregistration.DataAccessLayer
            {
                modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
            }
+
+        public System.Data.Entity.DbSet<uuregistration.Models.UurRegistratieDetails> UurRegistratieDetails { get; set; }
     }
 }
