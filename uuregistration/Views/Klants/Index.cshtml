@@ -1,4 +1,4 @@
-﻿@model IEnumerable<uuregistration.Models.Klant>
+﻿@model uuregistration.ViewModels.KlantenIndexViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -6,52 +6,10 @@
 
 <h2>Index</h2>
 
+<div id="KlantenLijst">
+    @Html.Partial("KlantenLijstControl", Model.Klanten)
+</div>
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Ondernemingsnummer)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Bedrijfsnaam)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Adres)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Postcode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Plaats)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ondernemingsnummer)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Bedrijfsnaam)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Adres)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Postcode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Plaats)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>

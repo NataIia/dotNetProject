@@ -7,7 +7,7 @@ using uuregistration.Models;
 
 namespace uuregistration.Services
 {
-    interface IKlantenService
+    public interface IKlantenService
     {
         List<Klant> GetAllKlanten();
         Klant GetKlant(int id);

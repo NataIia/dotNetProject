@@ -190,13 +190,11 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\FactuursController.cs" />
     <Compile Include="Controllers\GebruikersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KlantsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
-    <Compile Include="Controllers\UurRegistratiesController.cs" />
     <Compile Include="DataAccessLayer\UuregistratieContext.cs" />
     <Compile Include="DataAccessLayer\UuregistratieInitialiser.cs" />
     <Compile Include="Global.asax.cs">
@@ -237,6 +235,7 @@
     <Compile Include="Services\KlantenService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\GebruikersIndexViewModel.cs" />
+    <Compile Include="ViewModels\KlantenIndexViewModel.cs" />
     <Compile Include="ViewModels\RoleViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -297,16 +296,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Factuurs\Create.cshtml" />
-    <Content Include="Views\Factuurs\Delete.cshtml" />
-    <Content Include="Views\Factuurs\Details.cshtml" />
-    <Content Include="Views\Factuurs\Edit.cshtml" />
-    <Content Include="Views\Factuurs\Index.cshtml" />
-    <Content Include="Views\UurRegistraties\Create.cshtml" />
-    <Content Include="Views\UurRegistraties\Delete.cshtml" />
-    <Content Include="Views\UurRegistraties\Details.cshtml" />
-    <Content Include="Views\UurRegistraties\Edit.cshtml" />
-    <Content Include="Views\UurRegistraties\Index.cshtml" />
     <Content Include="Views\Klants\Create.cshtml" />
     <Content Include="Views\Klants\Delete.cshtml" />
     <Content Include="Views\Klants\Details.cshtml" />
@@ -320,6 +309,7 @@
     <Content Include="Views\Gebruikers\GebruikersLijstControl.cshtml" />
     <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Roles\Create.cshtml" />
+    <Content Include="Views\Klants\KlantenLijstControl.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

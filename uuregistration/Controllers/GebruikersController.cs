@@ -62,9 +62,8 @@ namespace uuregistration.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-//        [ValidateAntiForgeryToken]
-        //        public ActionResult Create([Bind(Include = "Id,Login,Voornaam,Achternaam,Email")] Gebruiker gebruiker)
-        public ActionResult Create(Gebruiker gebruiker)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,Login,Voornaam,Achternaam,Email")] Gebruiker gebruiker)
         {
             if (ModelState.IsValid)
             {
@@ -130,7 +129,7 @@ namespace uuregistration.Controllers
         /// <summary>
         /// De Index_Create functie wordt opgeroepen via AJAX en zal een PartialViewResult teruggeven
         /// </summary>
-        /// <param name="viewmodel">De AJAX call zal het model van de view (PeopleIndexViewModel) meegeven als parameter.
+        /// <param name="viewmodel">De AJAX call zal het model van de view (GebruikersIndexViewModel) meegeven als parameter.
         /// Hieruit wordt dan de nieuwe persoon gehaald via zijn property en aan de peopleService gegeven om op te slaan in de 
         /// databank (via de Add functie)</param>
         /// <returns>De lijst van alle personen (PartialView) opgevraagd via de peopleService</returns>

@@ -18,7 +18,10 @@ namespace uuregistration.Models
 
         public Update(Gebruiker author, Type type, string omschrijving)
         {
-
+            Author = author;
+            UpdateType = type;
+            UpdateOmschrijving = omschrijving;
+            UpdateTijd = DateTime.Now;
         }
 
     }
