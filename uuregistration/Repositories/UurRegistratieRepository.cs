@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
@@ -35,7 +36,7 @@ namespace uuregistration.Repositories
         {
             get
             {
-                throw new NotImplementedException();
+                return context.UurenRegistratie;
             }
         }
 
@@ -46,17 +47,24 @@ namespace uuregistration.Repositories
 
         public IQueryable<UurRegistratie> AllIncluding(params Expression<Func<UurRegistratie, object>>[] includeProperties)
         {
-            throw new NotImplementedException();
+            IQueryable<UurRegistratie> query = context.UurenRegistratie;
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+            return query;
         }
 
         public void DeleteUurRegistratie(int id)
         {
-            throw new NotImplementedException();
+            var uurRegistratie = context.UurenRegistratie.Find(id);
+            context.UurenRegistratie.Remove(uurRegistratie);
         }
 
         public void DeleteUurRegistratieDetail(int id)
         {
-            throw new NotImplementedException();
+            var uurRegistratieDetails = context.UurRegistratieDetails.Find(id);
+            context.UurRegistratieDetails.Remove(uurRegistratieDetails);
         }
 
         public void Dispose()
@@ -66,27 +74,45 @@ namespace uuregistration.Repositories
 
         public UurRegistratie Find(int id)
         {
-            throw new NotImplementedException();
+            return context.UurenRegistratie.Find(id);
         }
 
         public UurRegistratieDetails FindDetails(int id)
         {
-            throw new NotImplementedException();
+            return context.UurRegistratieDetails.Find(id);
         }
 
         public void InsertOrUpdate(UurRegistratieDetails uurRegistratieDetails)
         {
-            throw new NotImplementedException();
+            if (uurRegistratieDetails.Id == default(int))
+            {
+                uurRegistratieDetails.UpdateRecords.Add(new Update(null, Update.Type.GREATION, "new uurRegistratieDetails"));
+                context.UurRegistratieDetails.Add(uurRegistratieDetails);
+            } //new uurRegistratieDetails
+            else
+            {
+                uurRegistratieDetails.UpdateRecords.Add(new Update(null, Update.Type.UPDATE, "update uurRegistratieDetails" + uurRegistratieDetails.Id));
+                context.Entry(uurRegistratieDetails).State = EntityState.Modified;
+            } //existing uurRegistratieDetails
         }
 
         public void InsertOrUpdate(UurRegistratie uurRegistratie)
         {
-            throw new NotImplementedException();
+            if (uurRegistratie.Id == default(int))
+            {
+                uurRegistratie.UpdateRecords.Add(new Update(null, Update.Type.GREATION, "new uurRegistratie"));
+                context.UurenRegistratie.Add(uurRegistratie);
+            } //new uurRegistratie
+            else
+            {
+                uurRegistratie.UpdateRecords.Add(new Update(null, Update.Type.UPDATE, "update uurRegistratie" + uurRegistratie.Id));
+                context.Entry(uurRegistratie).State = EntityState.Modified;
+            } //existing uurRegistratie
         }
 
         public void Save()
         {
-            throw new NotImplementedException();
+            context.SaveChanges();
         }
     }
 }

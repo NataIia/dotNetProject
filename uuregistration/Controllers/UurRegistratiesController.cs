@@ -8,32 +8,40 @@ using System.Web;
 using System.Web.Mvc;
 using uuregistration.DataAccessLayer;
 using uuregistration.Models;
+using uuregistration.Services;
+using uuregistration.ViewModels;
 
 namespace uuregistration.Controllers
 {
     public class UurRegistratiesController : Controller
     {
-        private UuregistratieContext db = new UuregistratieContext();
-
+        private IUurRegistratieService uurRegistratieService;
+        public UurRegistratiesController(IUurRegistratieService uurRegistratieService)
+        {
+            this.uurRegistratieService = uurRegistratieService;
+        }
         // GET: UurRegistraties
         public ActionResult Index()
         {
-            return View(db.UurenRegistratie.ToList());
+            /// Use viewmodel to switch between all UurenRegistratie and newmade UurRegistratie in view and controller
+            UurRegistratieViewModel uurRegistratieViewModel = new UurRegistratieViewModel();
+            /// initialisatie van de viewmodel properties + doorgeven aan de overeenkomstige view
+            /// Opgelet: het model van de view moet aangepast worden naar dit viewmodel!
+            uurRegistratieViewModel.UurRegistraties = uurRegistratieService.GetAllUurRegistraties();
+            uurRegistratieViewModel.UurRegistratie = new UurRegistratie();
+            return View(uurRegistratieViewModel);
         }
 
         // GET: UurRegistraties/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            UurRegistratie uurRegistratie = db.UurenRegistratie.Find(id);
-            if (uurRegistratie == null)
-            {
-                return HttpNotFound();
-            }
-            return View(uurRegistratie);
+            UurRegistratieViewModel uurRegistratieViewModel = new UurRegistratieViewModel();
+            uurRegistratieViewModel.UurRegistraties = uurRegistratieService.GetAllUurRegistraties();
+            uurRegistratieViewModel.UurRegistratie = uurRegistratieService.GetUurRegistratie(id);
+            uurRegistratieViewModel.Details = uurRegistratieService.GetDetailsForUurRegistratie(id);
+            uurRegistratieViewModel.Detail = uurRegistratieService.GetUurRegistratieDetails(id);
+
+            return View(uurRegistratieViewModel);
         }
 
         // GET: UurRegistraties/Create
@@ -51,27 +59,19 @@ namespace uuregistration.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.UurenRegistratie.Add(uurRegistratie);
-                db.SaveChanges();
+                uurRegistratieService.InsertOrUpdate(uurRegistratie);
+                uurRegistratieService.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(uurRegistratie);
+            return View();
         }
 
         // GET: UurRegistraties/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            UurRegistratie uurRegistratie = db.UurenRegistratie.Find(id);
-            if (uurRegistratie == null)
-            {
-                return HttpNotFound();
-            }
-            return View(uurRegistratie);
+
+            return View(uurRegistratieService.GetUurRegistratie(id));
         }
 
         // POST: UurRegistraties/Edit/5
@@ -83,26 +83,17 @@ namespace uuregistration.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(uurRegistratie).State = EntityState.Modified;
-                db.SaveChanges();
+                uurRegistratieService.InsertOrUpdate(uurRegistratie);
+                uurRegistratieService.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(uurRegistratie);
         }
 
         // GET: UurRegistraties/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            UurRegistratie uurRegistratie = db.UurenRegistratie.Find(id);
-            if (uurRegistratie == null)
-            {
-                return HttpNotFound();
-            }
-            return View(uurRegistratie);
+            return View(uurRegistratieService.GetUurRegistratie(id));
         }
 
         // POST: UurRegistraties/Delete/5
@@ -110,9 +101,8 @@ namespace uuregistration.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            UurRegistratie uurRegistratie = db.UurenRegistratie.Find(id);
-            db.UurenRegistratie.Remove(uurRegistratie);
-            db.SaveChanges();
+            uurRegistratieService.DeleteUurRegistratie(id);
+            uurRegistratieService.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -120,7 +110,7 @@ namespace uuregistration.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                ((IDisposable)uurRegistratieService).Dispose();
             }
             base.Dispose(disposing);
         }

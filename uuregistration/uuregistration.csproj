@@ -236,7 +236,9 @@
     <Compile Include="Services\GebruikersService.cs" />
     <Compile Include="Services\IGebruikersService.cs" />
     <Compile Include="Services\IKlantenService.cs" />
+    <Compile Include="Services\IUurRegistratieService.cs" />
     <Compile Include="Services\KlantenService.cs" />
+    <Compile Include="Services\UurRegistratieService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\GebruikersIndexViewModel.cs" />
     <Compile Include="ViewModels\KlantenIndexViewModel.cs" />

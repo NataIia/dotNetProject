@@ -13,6 +13,6 @@ namespace uuregistration.Models
         public string TypeWerk { get; set; }
         public Boolean TeFactureren { get; set; }
         public List<Update> UpdateRecords { get; set; }
-        public UurRegistratie UurRegistratie { get; set; }
+        public virtual UurRegistratie UurRegistratie { get; set; }
     }
 }

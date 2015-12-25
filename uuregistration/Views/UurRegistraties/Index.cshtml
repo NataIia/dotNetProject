@@ -1,4 +1,4 @@
-﻿@model IEnumerable<uuregistration.Models.UurRegistratie>
+﻿@model uuregistration.ViewModels.UurRegistratieViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -12,15 +12,15 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Titel)
+            @Html.DisplayNameFor(model => Model.UurRegistratie.Titel)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Omschrijving)
+            @Html.DisplayNameFor(model => Model.UurRegistratie.Omschrijving)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.UurRegistraties) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Titel)
