@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -8,7 +9,9 @@ namespace uuregistration.Models
     public class UurRegistratieDetails
     {
         public int Id { get; set; }
+        [DataType(DataType.Date)]
         public DateTime StartTijd { get; set; }
+        [DataType(DataType.Date)]
         public DateTime EindTijd { get; set; }
         public string TypeWerk { get; set; }
         public Boolean TeFactureren { get; set; }

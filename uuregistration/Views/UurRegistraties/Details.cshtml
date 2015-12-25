@@ -28,11 +28,11 @@
 
     </dl>
 </div>
+<div id="UurRegistratieDetailsLijst">
+    @Html.Partial("../UurRegistratieDetails/UurRegistratieDetailsLijstControl", Model.Details)
+</div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.UurRegistratie.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
 
-<div id="UurRegistratieDetailsLijst">
-    @Html.Partial("../UurRegistratieDetails/UurRegistratieDetailsLijstControl", Model.Details)
-</div>

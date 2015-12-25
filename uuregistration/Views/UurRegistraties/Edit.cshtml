@@ -1,5 +1,4 @@
-﻿@model uuregistration.Models.UurRegistratie
-
+﻿@model uuregistration.ViewModels.UurRegistratieViewModel
 @{
     ViewBag.Title = "Edit";
 }
@@ -14,21 +13,21 @@
         <h4>UurRegistratie</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => Model.UurRegistratie.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Titel, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => Model.UurRegistratie.Titel, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Titel, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Titel, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => Model.UurRegistratie.Titel, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => Model.UurRegistratie.Titel, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Omschrijving, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => Model.UurRegistratie.Omschrijving, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Omschrijving, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Omschrijving, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => Model.UurRegistratie.Omschrijving, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => Model.UurRegistratie.Omschrijving, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -38,6 +37,61 @@
             </div>
         </div>
     </div>
+}
+
+<div id="UurRegistratieDetailsLijst"><!--partial view, changes with ajax-->
+    @Html.Partial("../UurRegistratieDetails/UurRegistratieDetailsLijstControl", Model.Details)
+</div>
+
+<!--not simple form, but ajax. if load there is action. additional parameter for uurRegistratie is passed as param1-->
+@using (Ajax.BeginForm("Index_Create", new { param1 = Model.UurRegistratie.Id }, new AjaxOptions() { UpdateTargetId = "UurRegistratieDetailsLijst" })) // UurRegistratieDetailsLijst = to update element by using the response from the server
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Uur Registratie Detail</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => Model.Detail.StartTijd, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => Model.Detail.StartTijd, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => Model.Detail.StartTijd, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => Model.Detail.EindTijd, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => Model.Detail.EindTijd, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => Model.Detail.EindTijd, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => Model.Detail.TypeWerk, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => Model.Detail.TypeWerk, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => Model.Detail.TypeWerk, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => Model.Detail.TeFactureren, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.CheckBoxFor(model => Model.Detail.TeFactureren, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
 }
 
 <div>

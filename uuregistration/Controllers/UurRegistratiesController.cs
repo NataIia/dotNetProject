@@ -70,8 +70,13 @@ namespace uuregistration.Controllers
         // GET: UurRegistraties/Edit/5
         public ActionResult Edit(int id)
         {
+            UurRegistratieViewModel uurRegistratieViewModel = new UurRegistratieViewModel();
+            uurRegistratieViewModel.UurRegistraties = uurRegistratieService.GetAllUurRegistraties();
+            uurRegistratieViewModel.UurRegistratie = uurRegistratieService.GetUurRegistratie(id);
+            uurRegistratieViewModel.Details = uurRegistratieService.GetDetailsForUurRegistratie(id);
+            uurRegistratieViewModel.Detail = uurRegistratieService.GetUurRegistratieDetails(id);
 
-            return View(uurRegistratieService.GetUurRegistratie(id));
+            return View(uurRegistratieViewModel);
         }
 
         // POST: UurRegistraties/Edit/5
@@ -113,6 +118,32 @@ namespace uuregistration.Controllers
                 ((IDisposable)uurRegistratieService).Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        /// <summary>
+        /// De Index_Create functie wordt opgeroepen via AJAX en zal een PartialViewResult teruggeven
+        /// </summary>
+        /// <param name="viewmodel">De AJAX call zal het model van de view (UurRegistratieViewModel) meegeven als parameter.
+        /// Hieruit wordt dan de nieuwe persoon gehaald via zijn property en aan de peopleService gegeven om op te slaan in de 
+        /// databank (via de Add functie)</param>
+        /// <returns>De lijst van alle uren (PartialView) opgevraagd via de uurRegistratieService</returns>
+        [HttpPost]
+        public PartialViewResult Index_Create(UurRegistratieViewModel viewmodel, string param1)
+        {
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
+            int id = Int32.Parse(param1);
+            if (ModelState.IsValid)
+            {
+                if (!string.IsNullOrEmpty(viewmodel.Detail.StartTijd.ToString()))
+                {
+                    viewmodel.Detail.UurRegistratie = uurRegistratieService.GetUurRegistratie(id);
+                    uurRegistratieService.InsertOrUpdateDetails(viewmodel.Detail);
+                    uurRegistratieService.SaveChanges();
+                }
+                return PartialView("../UurRegistratieDetails/UurRegistratieDetailsLijstControl", uurRegistratieService.GetUurRegistratieDetails(id));
+            }
+            return PartialView("../UurRegistratieDetails/UurRegistratieDetailsLijstControl");
+
         }
     }
 }

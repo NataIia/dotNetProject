@@ -328,10 +328,12 @@
     <Content Include="Views\UurRegistraties\Edit.cshtml" />
     <Content Include="Views\UurRegistraties\Index.cshtml" />
     <Content Include="Views\UurRegistratieDetails\UurRegistratieDetailsLijstControl.cshtml" />
+    <Content Include="Views\Shared\EditorTemplate\DateTime.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\EditorTemplate\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

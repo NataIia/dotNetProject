@@ -15,7 +15,7 @@ namespace uuregistration.Models
         public virtual Klant Klant { get; set; }
         public DateTime FactuurDatum { get; set; }
         public float Totaal { get; set; }
-        public List<FactuurDetails> DetailGgevens { get; set; }
+        public List<FactuurDetails> DetailGegevens { get; set; }
         public List<Update> UpdateRecords { get; set; }
     }
 }

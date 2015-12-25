@@ -21,17 +21,6 @@ namespace uuregistration.Repositories
             this.context = context;
         }
 
-/*        public IQueryable<UurRegistratieDetails> AllDetails(int uurRegistratieId)
-        {
-           IQueryable<UurRegistratieDetails> allDetails = context.UurRegistratieDetails;
-            IQueryable<UurRegistratieDetails> query = context.UurRegistratieDetails;
-            foreach (var item in allDetails)
-            {
-                query = query.Include(includeProperty);
-            } 
-            return context.UurRegistratieDetails.;
-        } */
-
         public IQueryable<UurRegistratie> AllUren
         {
             get
@@ -86,7 +75,7 @@ namespace uuregistration.Repositories
         {
             if (uurRegistratieDetails.Id == default(int))
             {
-                uurRegistratieDetails.UpdateRecords.Add(new Update(null, Update.Type.GREATION, "new uurRegistratieDetails"));
+//                uurRegistratieDetails.UpdateRecords.Add(new Update(null, Update.Type.GREATION, "new uurRegistratieDetails"));
                 context.UurRegistratieDetails.Add(uurRegistratieDetails);
             } //new uurRegistratieDetails
             else
@@ -100,12 +89,12 @@ namespace uuregistration.Repositories
         {
             if (uurRegistratie.Id == default(int))
             {
-                uurRegistratie.UpdateRecords.Add(new Update(null, Update.Type.GREATION, "new uurRegistratie"));
+ //               uurRegistratie.UpdateRecords.Add(new Update(null, Update.Type.GREATION, "new uurRegistratie"));
                 context.UurenRegistratie.Add(uurRegistratie);
             } //new uurRegistratie
             else
             {
-                uurRegistratie.UpdateRecords.Add(new Update(null, Update.Type.UPDATE, "update uurRegistratie" + uurRegistratie.Id));
+ //               uurRegistratie.UpdateRecords.Add(new Update(null, Update.Type.UPDATE, "update uurRegistratie" + uurRegistratie.Id));
                 context.Entry(uurRegistratie).State = EntityState.Modified;
             } //existing uurRegistratie
         }
