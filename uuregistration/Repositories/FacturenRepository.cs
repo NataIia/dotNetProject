@@ -97,6 +97,20 @@ namespace uuregistration.Repositories
             {
                 factuur.FactuurDatum = DateTime.Now;
                 factuur.FactuurJaar = factuur.FactuurDatum.Year;
+                factuur.Klant = k;
+                foreach (UurRegistratie ur in context.UurenRegistratie)
+                {
+                    var test = ur.Details;
+                    if (ur.Klant == factuur.Klant)
+                    {
+                        foreach (UurRegistratieDetails urd in ur.Details)
+                        {
+                            if (urd.StartTijd > factuur.BeginPeriode && urd.EindTijd <= factuur.EndPeriode)
+                            { factuur.DetailGegevens.Add(new FactuurDetails(ur)); }
+                        }
+                    }
+
+                }
                 //factuur.UpdateRecords.Add(new Update(null, Update.Type.GREATION, "new factuur"));
                 context.Facturen.Add(factuur);
             } //new factuur
@@ -105,23 +119,7 @@ namespace uuregistration.Repositories
                 //               factuur.UpdateRecords.Add(new Update(null, Update.Type.UPDATE, "update factuur" + factuur.Id));
                 context.Entry(factuur).State = EntityState.Modified;
             } //existing factuurDetails
-            factuur.FactuurDatum = DateTime.Now;
-            factuur.FactuurJaar = factuur.FactuurDatum.Year;
-            factuur.Klant = k;
-            foreach (UurRegistratie ur in context.UurenRegistratie)
-            {
-                var test = ur.Details;
-                if (ur.Klant == factuur.Klant)
-                {
-                    foreach (UurRegistratieDetails urd in ur.Details)
-                    {
-                        if (urd.StartTijd > factuur.BeginPeriode && urd.EindTijd <= factuur.EndPeriode)
-                        { factuur.DetailGegevens.Add(new FactuurDetails(ur)); }
-                    }
-                }
 
-            }
-            context.Entry(factuur).State = EntityState.Modified;
         }
 
         public void Save()

@@ -56,7 +56,7 @@ namespace uuregistration.Repositories
 
         public void InsertOrUpdate(Klant person)
         {
-            if (person.Id == default(int))
+            if (person.KlantId == default(int))
             { context.Klanten.Add(person); } //new gebruiker
             else { context.Entry(person).State = EntityState.Modified; } //existing gebruiker
 

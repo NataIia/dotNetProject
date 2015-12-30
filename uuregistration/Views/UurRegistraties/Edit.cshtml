@@ -13,7 +13,7 @@
         <h4>UurRegistratie</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => Model.UurRegistratie.Id)
+        @Html.HiddenFor(model => Model.UurRegistratie.UurRegistratieId)
 
         <div class="form-group">
             @Html.LabelFor(model => Model.UurRegistratie.Titel, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -44,7 +44,7 @@
 </div>
 
 <!--not simple form, but ajax. if load there is action. additional parameter for uurRegistratie is passed as param1-->
-@using (Ajax.BeginForm("Index_Create", new { param1 = Model.UurRegistratie.Id }, new AjaxOptions() { UpdateTargetId = "UurRegistratieDetailsLijst" })) // UurRegistratieDetailsLijst = to update element by using the response from the server
+@using (Ajax.BeginForm("Index_Create", new { param1 = Model.UurRegistratie.UurRegistratieId }, new AjaxOptions() { UpdateTargetId = "UurRegistratieDetailsLijst" })) // UurRegistratieDetailsLijst = to update element by using the response from the server
 {
     @Html.AntiForgeryToken()
 

@@ -8,7 +8,7 @@ namespace uuregistration.Models
 {
     public class UurRegistratieDetails
     {
-        public int Id { get; set; }
+        public int UurRegistratieDetailsId { get; set; }
         [DataType(DataType.Time)]
         public DateTime StartTijd { get; set; }
         [DataType(DataType.DateTime)]
@@ -16,6 +16,7 @@ namespace uuregistration.Models
         public string TypeWerk { get; set; }
         public Boolean TeFactureren { get; set; }
         public List<Update> UpdateRecords { get; set; }
+        public int? UurRegistratieId { get; set; }
         public virtual UurRegistratie UurRegistratie { get; set; }
     }
 }

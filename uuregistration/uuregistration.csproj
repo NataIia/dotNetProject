@@ -217,8 +217,10 @@
     <Compile Include="Models\UurRegistratie.cs" />
     <Compile Include="Models\UurRegistratieDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\DepartementenRepository.cs" />
     <Compile Include="Repositories\FacturenRepository.cs" />
     <Compile Include="Repositories\GebruikersRepository.cs" />
+    <Compile Include="Repositories\IDepartementenRepository.cs" />
     <Compile Include="Repositories\IFacturenRepository.cs" />
     <Compile Include="Repositories\IGebruikersRepository.cs" />
     <Compile Include="Repositories\IKlantenRepository.cs" />
@@ -236,8 +238,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.en.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\DepartementenService.cs" />
     <Compile Include="Services\FacturenService.cs" />
     <Compile Include="Services\GebruikersService.cs" />
+    <Compile Include="Services\IDepartementenService.cs" />
     <Compile Include="Services\IFacturenService.cs" />
     <Compile Include="Services\IGebruikersService.cs" />
     <Compile Include="Services\IKlantenService.cs" />

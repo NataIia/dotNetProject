@@ -10,5 +10,7 @@ namespace uuregistration.ViewModels
     {
         public List<Gebruiker> Gebruikers { get; set; }
         public Gebruiker Gebruiker { get; set; }
+        public List<Departement> Departementen { get; set; }
+        public Departement Departement { get; set; }
     }
 }

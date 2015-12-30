@@ -11,6 +11,8 @@ namespace uuregistration.Models
         public int HoofdlijnId { get; set; }
         public string Omschrijving { get; set; }
         public virtual UurRegistratie UurRegistratie {get; set; }
+        public int UurRegistratieId { get; set; }
+        public int FactuurId { get; set; }
         public virtual Factuur Factuur { get; set; }
         public float LijnNetto { get; set; }
         public List<Update> UpdateRecords { get; set; }

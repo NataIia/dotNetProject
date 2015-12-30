@@ -21,6 +21,7 @@ namespace uuregistration.Controllers
         /// via de interface = loose coupling!
         /// </summary>
         private IGebruikersService gebruikersService;
+        private IDepartementenService departementenService;
 
         /// <summary>
         /// De constructor van deze controller wordt opgeroepen via het unity framework die 
@@ -28,10 +29,11 @@ namespace uuregistration.Controllers
         /// (= injection van de service / Dependency Injection)
         /// </summary>
         /// <param name="gebruikersService"></param>
-        public GebruikersController(IGebruikersService gebruikersService)
+        public GebruikersController(IGebruikersService gebruikersService, IDepartementenService departementenService)
         {
             /// toewijzen van de globale peopleservice
             this.gebruikersService = gebruikersService;
+            this.departementenService = departementenService;
         }
 
         // GET: Gebruikers
@@ -43,6 +45,7 @@ namespace uuregistration.Controllers
             /// Opgelet: het model van de view moet aangepast worden naar dit viewmodel!
             gebruikersIndexViewModel.Gebruikers = gebruikersService.GetAllGebruikers();
             gebruikersIndexViewModel.Gebruiker = new Gebruiker();
+            gebruikersIndexViewModel.Departementen = departementenService.GetAllDepartementen();
             return View(gebruikersIndexViewModel);
         }
 

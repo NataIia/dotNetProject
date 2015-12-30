@@ -31,7 +31,7 @@ namespace uuregistration.Repositories
 
         public IQueryable<UurRegistratieDetails> AllDetails(int uurRegistratieId)
         {
-            return context.UurRegistratieDetails.AsQueryable().Where(urd => urd.UurRegistratie.Id == uurRegistratieId);
+            return context.UurRegistratieDetails.AsQueryable().Where(urd => urd.UurRegistratie.UurRegistratieId == uurRegistratieId);
         }
 
         public IQueryable<UurRegistratie> AllIncluding(params Expression<Func<UurRegistratie, object>>[] includeProperties)
@@ -73,7 +73,7 @@ namespace uuregistration.Repositories
 
         public void InsertOrUpdate(UurRegistratieDetails uurRegistratieDetails)
         {
-            if (uurRegistratieDetails.Id == default(int))
+            if (uurRegistratieDetails.UurRegistratieDetailsId == default(int))
             {
 //                uurRegistratieDetails.UpdateRecords.Add(new Update(null, Update.Type.GREATION, "new uurRegistratieDetails"));
                 context.UurRegistratieDetails.Add(uurRegistratieDetails);
@@ -87,7 +87,7 @@ namespace uuregistration.Repositories
 
         public void InsertOrUpdate(UurRegistratie uurRegistratie)
         {
-            if (uurRegistratie.Id == default(int))
+            if (uurRegistratie.UurRegistratieId == default(int))
             {
  //               uurRegistratie.UpdateRecords.Add(new Update(null, Update.Type.GREATION, "new uurRegistratie"));
                 context.UurenRegistratie.Add(uurRegistratie);

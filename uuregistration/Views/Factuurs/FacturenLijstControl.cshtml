@@ -18,7 +18,7 @@
             @Html.DisplayNameFor(model => model.Totaal)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Klant.Id)
+            @Html.DisplayNameFor(model => model.Klant.KlantId)
         </th>
         <th></th>
     </tr>
@@ -38,7 +38,7 @@
             @Html.DisplayFor(modelItem => item.Totaal)
         </td>
         <td>
-            @Html.DisplayFor(model => item.Klant.Id)
+            @Html.DisplayFor(model => item.Klant.KlantId)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

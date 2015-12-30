@@ -58,14 +58,14 @@ namespace uuregistration.Repositories
         public void InsertOrUpdate(Gebruiker gebruiker)
         {
 
-            if (gebruiker.Id == default(int))
+            if (gebruiker.GebruikerId == default(int))
             {
                 gebruiker.UpdateRecords.Add(new Update(null, Update.Type.GREATION, "new gebruiker"));
                 context.Gebruikers.Add(gebruiker);
             } //new gebruiker
             else
             {
-                gebruiker.UpdateRecords.Add(new Update(null, Update.Type.UPDATE, "update gebruiker" + gebruiker.Id));
+                gebruiker.UpdateRecords.Add(new Update(null, Update.Type.UPDATE, "update gebruiker" + gebruiker.GebruikerId));
                 context.Entry(gebruiker).State = EntityState.Modified;
             } //existing gebruiker
         }

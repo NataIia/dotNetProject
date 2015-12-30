@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 using uuregistration.DataAccessLayer;
@@ -13,6 +14,7 @@ namespace uuregistration.Repositories
         private KlantenRepository klantenRepository;
         private UurRegistratieRepository uurRegistratieRepository;
         private FacturenRepository facturenRepository;
+        private DepartementenRepository departementenRepository;
 
         public UnitOfWork()
         {
@@ -55,8 +57,19 @@ namespace uuregistration.Repositories
             }
             private set { facturenRepository = value; }
         }
+        public DepartementenRepository DepartementenRepository
+        {
+            get
+            {
+                if (departementenRepository == null) { departementenRepository = new DepartementenRepository(context); }
+                return departementenRepository;
+            }
+            private set { departementenRepository = value; }
+        }
         public void SaveChanges()
-        { context.SaveChanges(); }
+        {
+            context.SaveChanges();
+        }
 
         public void Dispose()
         {

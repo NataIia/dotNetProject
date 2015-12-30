@@ -25,6 +25,7 @@ namespace uuregistration.Models
         public Factuur()
         {
             FactuurDatum = DateTime.Now;
+            DetailGegevens = new List<FactuurDetails>();
         }
     }
 }
