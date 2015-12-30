@@ -12,7 +12,12 @@ namespace uuregistration.Repositories
         private GebruikersRepository gebruikerRepository;
         private KlantenRepository klantenRepository;
         private UurRegistratieRepository uurRegistratieRepository;
+        private FacturenRepository facturenRepository;
 
+        public UnitOfWork()
+        {
+            context = new UuregistratieContext();
+        }
         public KlantenRepository KlantenRepository
         {
             get
@@ -21,11 +26,6 @@ namespace uuregistration.Repositories
                 return klantenRepository;
             }
             private set { klantenRepository = value; }
-        }
-
-        public UnitOfWork()
-        {
-            context = new UuregistratieContext();
         }
         public GebruikersRepository GebruikerRepository
         {
@@ -45,6 +45,15 @@ namespace uuregistration.Repositories
                 return uurRegistratieRepository;
             }
             private set { uurRegistratieRepository = value; }
+        }
+        public FacturenRepository FacturenRepository
+        {
+            get
+            {
+                if (facturenRepository == null) { facturenRepository = new FacturenRepository(context); }
+                return facturenRepository;
+            }
+            private set { facturenRepository = value; }
         }
         public void SaveChanges()
         { context.SaveChanges(); }

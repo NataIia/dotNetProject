@@ -14,8 +14,17 @@ namespace uuregistration.Models
         public int FactuurNummer { get; set; }
         public virtual Klant Klant { get; set; }
         public DateTime FactuurDatum { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime BeginPeriode { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime EndPeriode { get; set; }
         public float Totaal { get; set; }
         public List<FactuurDetails> DetailGegevens { get; set; }
         public List<Update> UpdateRecords { get; set; }
+
+        public Factuur()
+        {
+            FactuurDatum = DateTime.Now;
+        }
     }
 }

@@ -1,0 +1,55 @@
+﻿@model uuregistration.ViewModels.FacturenIndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div id="FacturenList">
+    <!--partial view, changes with ajax-->
+    @Html.Partial("FacturenLijstControl", Model.Facturen)
+</div>
+
+<!--not simple form, but ajax. if load there is action-->
+@using (Ajax.BeginForm("Create_New", new AjaxOptions() { UpdateTargetId = "FacturenLijstControl" })) // FacturenLijstControl = to update element by using the response from the server
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Create new factuur</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => Model.Factuur.BeginPeriode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => Model.Factuur.BeginPeriode, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => Model.Factuur.BeginPeriode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => Model.Factuur.EndPeriode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => Model.Factuur.EndPeriode, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => Model.Factuur.EndPeriode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => Model.Factuur.Klant.Bedrijfsnaam, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => Model.Factuur.Klant.Bedrijfsnaam, new SelectList(Model.Klanten, "Bedrijfsnaam", "Bedrijfsnaam"))
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}

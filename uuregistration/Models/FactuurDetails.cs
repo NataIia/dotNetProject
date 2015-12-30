@@ -10,8 +10,14 @@ namespace uuregistration.Models
         public int Id { get; set; }
         public int HoofdlijnId { get; set; }
         public string Omschrijving { get; set; }
-        public List<DateTime> TijdGegevens { get; set; }
+        public virtual UurRegistratie UurRegistratie {get; set; }
+        public virtual Factuur Factuur { get; set; }
         public float LijnNetto { get; set; }
         public List<Update> UpdateRecords { get; set; }
+
+        public FactuurDetails(UurRegistratie uurRegistratie)
+        {
+            UurRegistratie = uurRegistratie;
+        }
     }
 }

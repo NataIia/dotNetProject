@@ -58,7 +58,7 @@ namespace uuregistration.Repositories
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            context.Dispose();
         }
 
         public UurRegistratie Find(int id)
@@ -80,7 +80,7 @@ namespace uuregistration.Repositories
             } //new uurRegistratieDetails
             else
             {
-                uurRegistratieDetails.UpdateRecords.Add(new Update(null, Update.Type.UPDATE, "update uurRegistratieDetails" + uurRegistratieDetails.Id));
+ //               uurRegistratieDetails.UpdateRecords.Add(new Update(null, Update.Type.UPDATE, "update uurRegistratieDetails" + uurRegistratieDetails.Id));
                 context.Entry(uurRegistratieDetails).State = EntityState.Modified;
             } //existing uurRegistratieDetails
         }

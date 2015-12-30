@@ -9,9 +9,9 @@ namespace uuregistration.Models
     public class UurRegistratieDetails
     {
         public int Id { get; set; }
-        [DataType(DataType.Date)]
+        [DataType(DataType.Time)]
         public DateTime StartTijd { get; set; }
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         public DateTime EindTijd { get; set; }
         public string TypeWerk { get; set; }
         public Boolean TeFactureren { get; set; }

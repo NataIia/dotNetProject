@@ -23,6 +23,7 @@ namespace uuregistration
             container.RegisterType<IGebruikersService, GebruikersService>();
             container.RegisterType<IKlantenService, KlantenService>();
             container.RegisterType<IUurRegistratieService, UurRegistratieService>();
+            container.RegisterType<IFacturenService, FacturenService>();
             container.RegisterType<AccountController>(new InjectionConstructor()); //solves the error The current type, Microsoft.AspNet.Identity.IUserStore`1[uuregistration.Models.ApplicationUser], is an interface and cannot be constructed. Are you missing a type mapping?
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

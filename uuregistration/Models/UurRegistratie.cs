@@ -12,6 +12,7 @@ namespace uuregistration.Models
         public string Omschrijving { get; set; }
         public virtual Klant Klant { get; set; }
         public virtual List<UurRegistratieDetails> Details { get; set; }
+        public virtual List<FactuurDetails> FactuurDetails { get; set; }
         public virtual List<Update> UpdateRecords { get; set; }
 
     }
