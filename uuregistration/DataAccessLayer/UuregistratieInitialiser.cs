@@ -61,6 +61,16 @@ namespace uuregistration.DataAccessLayer
 
             uurRedistraries.ForEach(u => context.UurenRegistratie.Add(u));
             context.SaveChanges();
+
+/*            ApplicationUser user = new ApplicationUser { Email = "departementadministrator@groept.be", PasswordHash = "" };
+            ApplicationUser dadmin = new ApplicationUser { Email = "2", PasswordHash = "2"};
+            ApplicationUser admin = new ApplicationUser { Email = "3", PasswordHash = "3"};
+
+            var users = new List<ApplicationUser> { user, dadmin, admin };
+
+            users.ForEach(u => context.ApplicationUsers.Add(u));
+            context.SaveChanges(); */
+
         }
     }
 }
