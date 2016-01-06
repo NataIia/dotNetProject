@@ -6,7 +6,13 @@
             @Html.DisplayNameFor(model => model.StartTijd)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.EindTijd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EindDate)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TypeWerk)
@@ -23,7 +29,13 @@
             @Html.DisplayFor(modelItem => item.StartTijd)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.StartDate)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.EindTijd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EindDate)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.TypeWerk)
@@ -32,9 +44,9 @@
             @Html.DisplayFor(modelItem => item.TeFactureren)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.UurRegistratieId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.UurRegistratieId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.UurRegistratieId })
+            @Html.ActionLink("Edit", "../UurRegistratieDetails/Edit", new { id=item.UurRegistratieDetailsId }) |
+            @Html.ActionLink("Details", "../UurRegistratieDetails/Details", new { id=item.UurRegistratieDetailsId }) |
+            @Html.ActionLink("Delete", "../UurRegistratieDetails/Delete", new { id=item.UurRegistratieDetailsId })
         </td>
     </tr>
 }

@@ -134,7 +134,7 @@ namespace uuregistration.Controllers
             int id = Int32.Parse(param1);
             if (ModelState.IsValid)
             {
-                if (!string.IsNullOrEmpty(viewmodel.Detail.StartTijd.ToString()))
+                if (!string.IsNullOrEmpty(viewmodel.Detail.StartDate.ToString()))
                 {
                     viewmodel.Detail.UurRegistratie = uurRegistratieService.GetUurRegistratie(id);
                     uurRegistratieService.InsertOrUpdateDetails(viewmodel.Detail);

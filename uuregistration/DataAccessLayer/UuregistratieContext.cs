@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Linq;
-using System.Web;
 using uuregistration.Models;
 
 namespace uuregistration.DataAccessLayer
@@ -21,16 +17,29 @@ namespace uuregistration.DataAccessLayer
         public DbSet<Factuur> Facturen { get; set; }
         public DbSet<FactuurDetails> FactuurDetails {get; set;}
         public DbSet<UurRegistratieDetails> UurRegistratieDetails { get; set; }
-/*                public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
-                        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
-                        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
-                        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
-                        public virtual DbSet<AspNetUser> AspNetUsers { get; set; } */
-        //prevents table names from being pluralized
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
            {
-               modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-           }
+            //prevents table names from being pluralized
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+
+            //modelBuilder.Entity<Content>()
+            //    .HasMany(c => c.Editors)
+            //    .WithOptional()
+            //    .WillCascadeOnDelete(false);
+
+            //modelBuilder.Entity<Content>()
+            //    .HasRequired(c => c.Owner)
+            //    .WithOptional()
+            //    .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
+            modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);
+            modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });
+            base.OnModelCreating(modelBuilder);
+
+        }
     }
 }
