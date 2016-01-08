@@ -10,7 +10,7 @@ namespace uuregistration.DataAccessLayer
     {
         public UuregistratieContext() : base() { }
 
-        public DbSet<Gebruiker> Gebruikers { get; set;}
+        public DbSet<ApplicationUser> Gebruikers { get; set;}
         public DbSet<Departement> Departements { get; set; }
         public DbSet<Klant> Klanten { get; set; }
         public DbSet<UurRegistratie> UurenRegistratie { get; set; }
@@ -19,21 +19,11 @@ namespace uuregistration.DataAccessLayer
         public DbSet<UurRegistratieDetails> UurRegistratieDetails { get; set; }
 
 
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
            {
             //prevents table names from being pluralized
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-
-
-            //modelBuilder.Entity<Content>()
-            //    .HasMany(c => c.Editors)
-            //    .WithOptional()
-            //    .WillCascadeOnDelete(false);
-
-            //modelBuilder.Entity<Content>()
-            //    .HasRequired(c => c.Owner)
-            //    .WithOptional()
-            //    .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
             modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);
@@ -41,5 +31,7 @@ namespace uuregistration.DataAccessLayer
             base.OnModelCreating(modelBuilder);
 
         }
+
+        public System.Data.Entity.DbSet<uuregistration.Models.SelectRoleEditorViewModel> SelectRoleEditorViewModels { get; set; }
     }
 }

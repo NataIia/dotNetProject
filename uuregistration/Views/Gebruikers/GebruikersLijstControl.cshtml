@@ -1,4 +1,4 @@
-﻿@model IEnumerable<uuregistration.Models.Gebruiker>
+﻿@model IEnumerable<uuregistration.Models.ApplicationUser>
 
 <table class="table">
     <tr>
@@ -6,7 +6,7 @@
             @Html.DisplayNameFor(model => model.Login)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Voornaam)
+            @Html.DisplayNameFor(model => model.Id)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Achternaam)
@@ -23,7 +23,7 @@
             @Html.DisplayFor(modelItem => item.Login)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Voornaam)
+            @Html.DisplayFor(modelItem => item.Id)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Achternaam)
@@ -32,9 +32,9 @@
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.GebruikerId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.GebruikerId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.GebruikerId })
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
     </tr>
 }

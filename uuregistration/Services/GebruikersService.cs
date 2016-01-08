@@ -24,17 +24,17 @@ namespace uuregistration.Services
             uow.Dispose();
         }
 
-        public List<Gebruiker> GetAllGebruikers()
+        public List<ApplicationUser> GetAllGebruikers()
         {
-            return uow.GebruikerRepository.All.ToList<Gebruiker>();
+            return uow.GebruikerRepository.All.ToList<ApplicationUser>();
         }
 
-        public Gebruiker GetGebruiker(int id)
+        public ApplicationUser GetGebruiker(String id)
         {
             return uow.GebruikerRepository.Find(id);
         }
 
-        public void InsertOrUpdate(Gebruiker gebruiker)
+        public void InsertOrUpdate(ApplicationUser gebruiker)
         {
             uow.GebruikerRepository.InsertOrUpdate(gebruiker);
             uow.SaveChanges();

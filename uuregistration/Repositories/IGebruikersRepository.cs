@@ -10,10 +10,10 @@ namespace uuregistration.Repositories
 {
     public interface IGebruikersRepository
     {
-        IQueryable<Gebruiker> All { get; }
-        IQueryable<Gebruiker> AllIncluding(params Expression<Func<Gebruiker, object>>[] includeProperties);
-        Gebruiker Find(int id);
-        void InsertOrUpdate(Gebruiker person);
+        IQueryable<ApplicationUser> All { get; }
+        IQueryable<ApplicationUser> AllIncluding(params Expression<Func<ApplicationUser, object>>[] includeProperties);
+        ApplicationUser Find(String id);
+        void InsertOrUpdate(ApplicationUser person);
         void Delete(int id);
         void Save();
         void Dispose();

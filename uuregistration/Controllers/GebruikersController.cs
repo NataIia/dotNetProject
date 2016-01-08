@@ -44,13 +44,13 @@ namespace uuregistration.Controllers
             /// initialisatie van de viewmodel properties + doorgeven aan de overeenkomstige view
             /// Opgelet: het model van de view moet aangepast worden naar dit viewmodel!
             gebruikersIndexViewModel.Gebruikers = gebruikersService.GetAllGebruikers();
-            gebruikersIndexViewModel.Gebruiker = new Gebruiker();
+            gebruikersIndexViewModel.Gebruiker = new ApplicationUser();
             gebruikersIndexViewModel.Departementen = departementenService.GetAllDepartementen();
             return View(gebruikersIndexViewModel);
         }
 
         // GET: Gebruikers/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(String id)
         {
             return View(gebruikersService.GetGebruiker(id));
         }
@@ -66,7 +66,7 @@ namespace uuregistration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Login,Voornaam,Achternaam,Email")] Gebruiker gebruiker)
+        public ActionResult Create([Bind(Include = "Id,Login,Voornaam,Achternaam,Email")] ApplicationUser gebruiker)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +80,7 @@ namespace uuregistration.Controllers
         }
 
         // GET: Gebruikers/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(String id)
         {
             return View(gebruikersService.GetGebruiker(id));
         }
@@ -90,7 +90,7 @@ namespace uuregistration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Login,Voornaam,Achternaam,Email")] Gebruiker gebruiker)
+        public ActionResult Edit([Bind(Include = "Id,Login,Voornaam,Achternaam,Email")] ApplicationUser gebruiker)
         {
             if (ModelState.IsValid)
             {
@@ -105,7 +105,7 @@ namespace uuregistration.Controllers
         }
 
         // GET: Gebruikers/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(String id)
         {         
             return View(gebruikersService.GetGebruiker(id));
         }

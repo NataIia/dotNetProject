@@ -21,7 +21,7 @@ namespace uuregistration.Repositories
         {
             this.context = context;
         }
-        public IQueryable<Gebruiker> All
+        public IQueryable<ApplicationUser> All
         {
             get
             {
@@ -29,9 +29,9 @@ namespace uuregistration.Repositories
             }
         }
 
-        public IQueryable<Gebruiker> AllIncluding(params Expression<Func<Gebruiker, object>>[] includeProperties)
+        public IQueryable<ApplicationUser> AllIncluding(params Expression<Func<ApplicationUser, object>>[] includeProperties)
         {
-            IQueryable<Gebruiker> query = context.Gebruikers;
+            IQueryable<ApplicationUser> query = context.Gebruikers;
             foreach (var includeProperty in includeProperties)
             {
                 query = query.Include(includeProperty);
@@ -50,22 +50,31 @@ namespace uuregistration.Repositories
             context.Dispose();
         }
 
-        public Gebruiker Find(int id)
+        public ApplicationUser Find(String id)
         {
             return context.Gebruikers.Find(id);
         }
 
-        public void InsertOrUpdate(Gebruiker gebruiker)
+        public void InsertOrUpdate(ApplicationUser gebruiker)
         {
+            Boolean exist = false;
 
-            if (gebruiker.Id == default(int).ToString())
+            foreach (ApplicationUser g in context.Gebruikers.ToList<ApplicationUser>())
             {
-                gebruiker.UpdateRecords.Add(new Update(null, Update.Type.GREATION, "new gebruiker"));
+                if (g.Id == gebruiker.Id)
+                {
+                    exist = true;
+                }
+            }
+
+            if (!exist)
+            {
+//                gebruiker.UpdateRecords.Add(new Update(null, Update.Type.GREATION, "new gebruiker"));
                 context.Gebruikers.Add(gebruiker);
             } //new gebruiker
             else
             {
-                gebruiker.UpdateRecords.Add(new Update(null, Update.Type.UPDATE, "update gebruiker" + gebruiker.Id));
+//                gebruiker.UpdateRecords.Add(new Update(null, Update.Type.UPDATE, "update gebruiker" + gebruiker.Id));
                 context.Entry(gebruiker).State = EntityState.Modified;
             } //existing gebruiker
         }

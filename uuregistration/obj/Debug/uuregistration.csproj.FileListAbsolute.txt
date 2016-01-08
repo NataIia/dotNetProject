@@ -82,3 +82,6 @@ D:\development\groept\ASPdotNET\project\uuregistration\uuregistration\bin\Micros
 D:\development\groept\ASPdotNET\project\uuregistration\uuregistration\bin\Microsoft.Practices.Unity.Configuration.xml
 D:\development\groept\ASPdotNET\project\uuregistration\uuregistration\bin\Microsoft.Practices.Unity.RegistrationByConvention.xml
 D:\development\groept\ASPdotNET\project\uuregistration\uuregistration\obj\Debug\uuregistration.csprojResolveAssemblyReference.cache
+D:\development\groept\ASPdotNET\project\uuregistration\uuregistration\obj\Debug\uuregistration.Migrations.InitialCreate.resources
+D:\development\groept\ASPdotNET\project\uuregistration\uuregistration\obj\Debug\uuregistration.Migrations.init.resources
+D:\development\groept\ASPdotNET\project\uuregistration\uuregistration\obj\Debug\uuregistration.Migrations.Initial.resources

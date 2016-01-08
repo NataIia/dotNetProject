@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using uuregistration.Models;
+using System.Collections.Generic;
 
 namespace uuregistration.Controllers
 {
@@ -53,7 +54,6 @@ namespace uuregistration.Controllers
             }
         }
 
-        //
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -150,21 +150,27 @@ namespace uuregistration.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            var idManager = new IdentityManager();
+
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = model.GetUser();
+                bool success = idManager.AddUserToRole(user.Id, "Gebruiker");
+                if (!success) return View(model);
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    //                    return RedirectToAction("Index", "Home");
+                    //redirecting to a not standart Index method defined in AccountController.
+                    return RedirectToAction("Index", "Account");
                 }
                 AddErrors(result);
             }
@@ -482,5 +488,114 @@ namespace uuregistration.Controllers
             }
         }
         #endregion
+
+        //added
+        //        [Authorize(Roles = "Admin")]
+        [AllowAnonymous]
+        public ActionResult Index()
+        {
+            var Db = new ApplicationDbContext();
+            var users = Db.Users;
+            var model = new List<EditUserViewModel>();
+            foreach (var user in users)
+            {
+                var u = new EditUserViewModel(user);
+                model.Add(u);
+            }
+            return View(model);
+        }
+
+        //       [Authorize(Roles = "Admin")]
+        [AllowAnonymous]
+        public ActionResult Edit(string id, ManageController.ManageMessageId? Message = null)
+        {
+            var Db = new ApplicationDbContext();
+            var user = Db.Users.First(u => u.Login == id);
+            var model = new EditUserViewModel(user);
+            ViewBag.MessageId = Message;
+            return View(model);
+        }
+        [HttpPost]
+//        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public async Task<ActionResult> Edit(EditUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var Db = new ApplicationDbContext();
+                var user = Db.Users.First(u => u.Voornaam == model.Voornaam);
+                // Update the user data:
+                user.Voornaam = model.Voornaam;
+                user.Achternaam = model.Achternaam;
+                user.Email = model.Email;
+                Db.Entry(user).State = System.Data.Entity.EntityState.Modified;
+                await Db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+//        [Authorize(Roles = "Admin")]
+        public ActionResult Delete(string id = null)
+        {
+            var Db = new ApplicationDbContext();
+            var user = Db.Users.First(u => u.Email == id);
+            var model = new EditUserViewModel(user);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(model);
+        }
+
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+//        [Authorize(Roles = "Admin")]
+        public ActionResult DeleteConfirmed(string id)
+        {
+            var Db = new ApplicationDbContext();
+            var user = Db.Users.First(u => u.Email == id);
+            Db.Users.Remove(user);
+            Db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        //        [Authorize(Roles = "Admin")]
+        [AllowAnonymous]
+        public ActionResult UserRoles(string id)
+        {
+            var Db = new ApplicationDbContext();
+            var user = Db.Users.First(u => u.Login == id);
+            var model = new SelectUserRolesViewModel(user);
+            return View(model);
+        }
+
+
+        [HttpPost]
+//        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public ActionResult UserRoles(SelectUserRolesViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var idManager = new IdentityManager();
+                var Db = new ApplicationDbContext();
+                var user = Db.Users.First(u => u.Achternaam == model.Achternaam);
+                idManager.ClearUserRoles(user.Id);
+                foreach (var role in model.Roles)
+                {
+                    if (role.Selected)
+                    {
+                        idManager.AddUserToRole(user.Id, role.RoleName);
+                    }
+                }
+                return RedirectToAction("index");
+            }
+            return View();
+        }
     }
 }

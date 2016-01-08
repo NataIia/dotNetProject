@@ -23,38 +23,60 @@ namespace uuregistration.DataAccessLayer
              you locate the source of a problem if an exception occurs while the code is writing to the database. */
             context.SaveChanges();
 
+            this.AddUserAndRoles(context);
+
             //creating a UserManger from ASP.NET Identity system which will let us do operations on the
             //User such as Create, List, Edit and Verify the user.You can think of the UserManager as 
             //being analogus to SQLMembershpProvider in ASP.NET 2.0
-            var UserManager = new UserManager<Gebruiker>(new UserStore<Gebruiker>(context));
+           // var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-            //creating a RoleManager from ASP.NET Identity system which lets us operate on Roles.
-            //You can think of the RoleManager as being analogus to SQLRoleMembershpProvider in ASP.NET 2.0
-            var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+           // //creating a RoleManager from ASP.NET Identity system which lets us operate on Roles.
+           // //You can think of the RoleManager as being analogus to SQLRoleMembershpProvider in ASP.NET 2.0
+           // var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
 
-            string name = "Admin";
-            string password = "123456";
+           // string name = "Admin";
+           // string password = "GroeptT@2015";
+           // string email = "departementadministrator@groept.be";
 
-            //Create Role Admin if it does not exist
-            if (!RoleManager.RoleExists(name))
-            {
-                  var roleresult = RoleManager.Create(new IdentityRole(name));
-             }
+           // //Create Role Admin if it does not exist
+           // if (!RoleManager.RoleExists(name))
+           // {
+           //       var roleresult = RoleManager.Create(new IdentityRole(name));
+           //  }
                
-           //Create User=Admin with password=123456
-            var user = new Gebruiker();
-            user.Login  = name;
-            user.UserName = user.Login;
-            var adminresult = UserManager.Create(user, password);
-            context.Gebruikers.Add(user);
+           ////Create User=Admin with password=123456
+           // var user = new ApplicationUser();
+           // user.Login  = name;
+           // user.UserName = user.Login;
+           // user.Email = email;
+
+            //           var adminresult = UserManager.Create(user, password);
+
+            //var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+
+            //for (int i = 0; i < 4; i++)
+            //{
+            //    var AnotherUser = new ApplicationUser()
+            //    {
+            //        UserName = string.Format("User{0}", i.ToString()),
+
+            //        // Add the following so our Seed data is complete:
+            //        FirstName = string.Format("FirstName{0}", i.ToString()),
+            //        LastName = string.Format("LastName{0}", i.ToString()),
+            //        Email = string.Format("Email{0}@Example.com", i.ToString()),
+            //    };
+            //    manager.Create(AnotherUser, string.Format("Password{0}", i.ToString()));
+            //}
+
+            context.SaveChanges();
 
             //Add User Admin to Role Admin
-            if (adminresult.Succeeded)
-            {
-                Console.WriteLine("here");
-                var result = UserManager.AddToRole(user.Id, name);
-             }
+            //if (adminresult.Succeeded)
+            //{
+            //    Console.WriteLine(user.Id);
+            //    var result = UserManager.AddToRole(user.Id, name);
+            // }
 
             base.Seed(context);
 
@@ -109,6 +131,71 @@ namespace uuregistration.DataAccessLayer
             users.ForEach(u => context.ApplicationUsers.Add(u));
             context.SaveChanges(); */
 
+        }
+
+        bool AddUserAndRoles(UuregistratieContext context)
+        {
+            bool success = false;
+
+            var idManager = new IdentityManager();
+            success = idManager.CreateRole("Administrator");
+            if (!success == true) return success;
+
+            success = idManager.CreateRole("DepartementAdministrator");
+            if (!success == true) return success;
+
+            success = idManager.CreateRole("Gebruiker");
+            if (!success) return success;
+
+
+            var newUserAdmin = new ApplicationUser()
+            {
+                Voornaam = "Natalia",
+                Achternaam = "Dyubankova",
+                Email = "administrator@groept.be",
+                UserName = "administrator@groept.be",
+                Login = "NataliaDyubankovaAdmin"
+                
+            };
+
+            // careful here - password should fill the requirements
+            success = idManager.CreateUser(newUserAdmin, "GroeptT@2015");
+            if (!success) return success;
+
+            success = idManager.AddUserToRole(newUserAdmin.Id, "Administrator");
+            if (!success) return success;
+
+            var newUserDAdmin = new ApplicationUser()
+            {
+                Voornaam = "Natalia",
+                Achternaam = "Dyubankova",
+                Email = "departementadministrator@groept.be",
+                UserName = "departementadministrator@groept.be",
+                Login = "NataliaDyubankovaDAdmin"
+            };
+
+            success = idManager.CreateUser(newUserDAdmin, "GroeptT@2015");
+            if (!success) return success;
+
+            success = idManager.AddUserToRole(newUserDAdmin.Id, "DepartementAdministrator");
+            if (!success) return success;
+
+            var newUserGebruiker = new ApplicationUser()
+            {
+                Voornaam = "Natalia",
+                Achternaam = "Dyubankova",
+                Email = "user@groept.be",
+                UserName = "user@groept.be",
+                Login = "NataliaDyubankovaUser"
+            };
+
+            success = idManager.CreateUser(newUserGebruiker, "GroeptT@2015");
+            if (!success) return success;
+
+            success = idManager.AddUserToRole(newUserGebruiker.Id, "Gebruiker");
+            if (!success) return success;
+
+            return success;
         }
     }
 }

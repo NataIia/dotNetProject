@@ -14,9 +14,9 @@ namespace uuregistration.Services
     /// </summary>
     public interface IGebruikersService
     {
-        List<Gebruiker> GetAllGebruikers();
-        Gebruiker GetGebruiker(int id);
-        void InsertOrUpdate(Gebruiker gebruiker);
+        List<ApplicationUser> GetAllGebruikers();
+        ApplicationUser GetGebruiker(String id);
+        void InsertOrUpdate(ApplicationUser gebruiker);
         void SaveChanges();
         void Delete(int id);
     }

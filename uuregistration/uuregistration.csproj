@@ -203,6 +203,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601071144087_InitialCreate.cs" />
+    <Compile Include="Migrations\201601071144087_InitialCreate.Designer.cs">
+      <DependentUpon>201601071144087_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601071516554_init.cs" />
+    <Compile Include="Migrations\201601071516554_init.Designer.cs">
+      <DependentUpon>201601071516554_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601080937554_Initial.cs" />
+    <Compile Include="Migrations\201601080937554_Initial.Designer.cs">
+      <DependentUpon>201601080937554_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Departement.cs" />
     <Compile Include="Models\Factuur.cs" />
@@ -338,13 +351,19 @@
     <Content Include="Views\UurRegistraties\Edit.cshtml" />
     <Content Include="Views\UurRegistraties\Index.cshtml" />
     <Content Include="Views\UurRegistratieDetails\UurRegistratieDetailsLijstControl.cshtml" />
-    <Content Include="Views\Shared\EditorTemplate\DateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Factuurs\Create.cshtml" />
     <Content Include="Views\Factuurs\Delete.cshtml" />
     <Content Include="Views\Factuurs\Details.cshtml" />
     <Content Include="Views\Factuurs\Edit.cshtml" />
     <Content Include="Views\Factuurs\Index.cshtml" />
     <Content Include="Views\Factuurs\FacturenLijstControl.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Account\Delete.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\UserRoles.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SelectRoleEditorViewModel2.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SelectRoleEditorViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -360,6 +379,15 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\201601071144087_InitialCreate.resx">
+      <DependentUpon>201601071144087_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601071516554_init.resx">
+      <DependentUpon>201601071516554_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601080937554_Initial.resx">
+      <DependentUpon>201601080937554_Initial.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resource.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.en.Designer.cs</LastGenOutput>
