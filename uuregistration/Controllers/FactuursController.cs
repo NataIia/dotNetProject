@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -17,17 +19,28 @@ namespace uuregistration.Controllers
     {
         private IFacturenService factuurService;
         private IKlantenService klantenService;
-        public FactuursController(IFacturenService factuurService, IKlantenService klantenService)
+        private IGebruikersService gebruikerService;
+        public FactuursController(IFacturenService factuurService, IKlantenService klantenService, IGebruikersService gebruikerService)
         {
             this.factuurService = factuurService;
             this.klantenService = klantenService;
+            this.gebruikerService = gebruikerService;
         }
 
         // GET: Factuurs
+        [Authorize(Roles = "DepartementAdministrator, Administrator")]
         public ActionResult Index()
         {
+            int did= gebruikerService.GetDepartementId(System.Web.HttpContext.Current.User.Identity.Name);
             FacturenIndexViewModel factuurIndexViewModel = new FacturenIndexViewModel();
-            factuurIndexViewModel.Facturen = factuurService.GetAllFacturen();
+            if (User.IsInRole("Administrator"))
+            {
+                factuurIndexViewModel.Facturen = factuurService.GetAllFacturen();
+            }
+            else if (User.IsInRole("DepartementAdministrator"))
+            {
+                factuurIndexViewModel.Facturen = factuurService.GetAllFacturenByDepartement(gebruikerService.GetDepartementId(System.Web.HttpContext.Current.User.Identity.Name));
+            }
             factuurIndexViewModel.Factuur = new Factuur();
             factuurIndexViewModel.Klanten = klantenService.GetAllKlanten();
             return View(factuurIndexViewModel);

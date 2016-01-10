@@ -18,6 +18,8 @@ namespace uuregistration.DataAccessLayer
         public DbSet<FactuurDetails> FactuurDetails {get; set;}
         public DbSet<UurRegistratieDetails> UurRegistratieDetails { get; set; }
 
+        public DbSet<SelectRoleEditorViewModel> SelectRoleEditorViewModels { get; set; }
+
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -31,7 +33,5 @@ namespace uuregistration.DataAccessLayer
             base.OnModelCreating(modelBuilder);
 
         }
-
-        public System.Data.Entity.DbSet<uuregistration.Models.SelectRoleEditorViewModel> SelectRoleEditorViewModels { get; set; }
     }
 }

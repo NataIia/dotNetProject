@@ -490,7 +490,7 @@ namespace uuregistration.Controllers
         #endregion
 
         //added
-        //        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administrator")]
         [AllowAnonymous]
         public ActionResult Index()
         {
@@ -505,7 +505,7 @@ namespace uuregistration.Controllers
             return View(model);
         }
 
-        //       [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administrator")]
         [AllowAnonymous]
         public ActionResult Edit(string id, ManageController.ManageMessageId? Message = null)
         {
@@ -516,7 +516,7 @@ namespace uuregistration.Controllers
             return View(model);
         }
         [HttpPost]
-//        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administrator")]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
         public async Task<ActionResult> Edit(EditUserViewModel model)
@@ -537,7 +537,7 @@ namespace uuregistration.Controllers
             return View(model);
         }
 
-//        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(string id = null)
         {
             var Db = new ApplicationDbContext();
@@ -553,7 +553,7 @@ namespace uuregistration.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-//        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administrator")]
         public ActionResult DeleteConfirmed(string id)
         {
             var Db = new ApplicationDbContext();
@@ -563,7 +563,7 @@ namespace uuregistration.Controllers
             return RedirectToAction("Index");
         }
 
-        //        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administrator")]
         [AllowAnonymous]
         public ActionResult UserRoles(string id)
         {
@@ -575,7 +575,7 @@ namespace uuregistration.Controllers
 
 
         [HttpPost]
-//        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administrator")]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
         public ActionResult UserRoles(SelectUserRolesViewModel model)

@@ -16,6 +16,7 @@ namespace uuregistration.Services
     {
         List<ApplicationUser> GetAllGebruikers();
         ApplicationUser GetGebruiker(String id);
+        int GetDepartementId(string gebruikerNaam);
         void InsertOrUpdate(ApplicationUser gebruiker);
         void SaveChanges();
         void Delete(int id);

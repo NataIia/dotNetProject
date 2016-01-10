@@ -44,5 +44,14 @@ namespace uuregistration.Services
         {
             uow.SaveChanges();
         }
+        public int GetDepartementId(string gebruikerNaam)
+        {
+            ApplicationUser applicationUser = null;
+            foreach (ApplicationUser user in uow.GebruikerRepository.All.ToList<ApplicationUser>())
+            {
+                if (user.Login == gebruikerNaam) applicationUser = user;
+            }
+            return applicationUser.DepartementId ?? default(int);
+        }
     }
 }

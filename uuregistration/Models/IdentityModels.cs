@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
+using uuregistration.Repositories;
 
 namespace uuregistration.Models
 {
@@ -14,10 +15,8 @@ namespace uuregistration.Models
         public string Login { get; set; }
         public string Voornaam { get; set; }
         public string Achternaam { get; set; }
-        //        public string Email { get; set; } from ApplicationUser
         public int? DepartementId { get; set; }
         public virtual Departement Departement { get; set; }
-        //        public virtual ICollection<Departement> Departementen { get; set; }
         public virtual ICollection<Klant> Klanten { get; set; }
         public virtual ICollection<Update> UpdateRecords { get; set; }
         public ApplicationUser()
@@ -44,7 +43,7 @@ namespace uuregistration.Models
 
         public static ApplicationDbContext Create()
         {
-            return new ApplicationDbContext();
+             return new ApplicationDbContext();
         }
     }
 

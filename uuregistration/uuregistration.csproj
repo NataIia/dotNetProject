@@ -254,6 +254,7 @@
     <Compile Include="Services\DepartementenService.cs" />
     <Compile Include="Services\FacturenService.cs" />
     <Compile Include="Services\GebruikersService.cs" />
+    <Compile Include="Services\Helper.cs" />
     <Compile Include="Services\IDepartementenService.cs" />
     <Compile Include="Services\IFacturenService.cs" />
     <Compile Include="Services\IGebruikersService.cs" />

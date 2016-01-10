@@ -28,13 +28,18 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li> <!--appearing name, page name, controller name -->
-                    <li>@Html.ActionLink("About", "About", "Home")</li> <!--appearing name, page name, controller name -->
+                    <li>@Html.ActionLink("About", "About", "Home")</li> <!--appearing name, page name, controller name --> 
                     <li>@Html.ActionLink("Uur registratie", "Index", "UurRegistraties")</li> <!--appearing name, page name, controller name -->
+                    @if (User.IsInRole("Administrator") || User.IsInRole("DepartementAdministrator"))
+                    {
                     <li>@Html.ActionLink("Facturatie", "Index", "Factuurs")</li> <!--appearing name, page name, controller name -->
-                    <li>@Html.ActionLink("Klanten", "Index", "Klants")</li> <!--appearing name, page name, controller name -->
-<!--                    if (User.IsInRole("testrol2")) -->
-                    
-                        <li>@Html.ActionLink("Gebruikers", "Index", "Account")</li> <!--appearing name, page name, controller name -->
+                    }
+                    <!--Een administrator kan het systeem beheren en kan dus: o Alle gebruikers beheren (aanmaken / verwijderen / aanpassen) o Alle klanten beheren-->
+                    @if (User.IsInRole("Administrator"))
+                    { 
+                         <li>@Html.ActionLink("Gebruikers", "Index", "Account")</li> <!--appearing name, page name, controller name -->
+                        <li>@Html.ActionLink("Klanten", "Index", "Klants")</li> <!--appearing name, page name, controller name -->
+                    }
                     
                 </ul>
                 @Html.Partial("_LoginPartial")

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using uuregistration.DataAccessLayer;
 using uuregistration.Models;
 using uuregistration.Repositories;
 
@@ -13,6 +14,11 @@ namespace uuregistration.Services
         public FacturenService()
         {
             uow = new UnitOfWork();
+        }
+
+        public UuregistratieContext Context
+        {
+            get { return uow.Context; }
         }
 
         public void DeleteFactuur(int id)
@@ -33,6 +39,16 @@ namespace uuregistration.Services
         public List<Factuur> GetAllFacturen()
         {
             return uow.FacturenRepository.AllFacturen.ToList<Factuur>();
+        }
+
+        public List<Factuur> GetAllFacturenByDepartement(int departementId)
+        {
+            List<Factuur> facturen = new List<Factuur>();
+            foreach (Factuur f in this.GetAllFacturen())
+            {
+                if (f.Klant.Gebruiker.DepartementId == departementId) facturen.Add(f);
+            }
+            return facturen;
         }
 
         public List<FactuurDetails> GetDetailsForFactuur(int factuurId)

@@ -20,6 +20,10 @@ namespace uuregistration.Repositories
         {
             context = new UuregistratieContext();
         }
+        public UuregistratieContext Context
+        {
+            get { return context; }
+        }
         public KlantenRepository KlantenRepository
         {
             get
