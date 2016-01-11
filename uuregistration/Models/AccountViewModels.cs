@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using uuregistration.Services;
 
 namespace uuregistration.Models
 {
@@ -100,6 +101,7 @@ namespace uuregistration.Models
                 Voornaam = this.Voornaam,
                 Achternaam = this.Achternaam,
                 Email = this.Email,
+                Login = this.Login,
                 UserName = this.Login
             };
             return user;
@@ -160,23 +162,24 @@ namespace uuregistration.Models
     //======added=============
     public class EditUserViewModel
     {
-        public EditUserViewModel() { }
+        public EditUserViewModel()
+        {
+            var Db = new ApplicationDbContext();
+            this.Users = Db.Users.ToList<ApplicationUser>();
+            this.Roles = Db.Roles.ToList<IdentityRole>();
+            DepartementenService ds = new DepartementenService();
+            Departments = ds.GetAllDepartementen();
+        }
 
         // Allow Initialization with an instance of ApplicationUser:
-        public EditUserViewModel(ApplicationUser user)
+        public EditUserViewModel(ApplicationUser user) : this()
         {
             this.Voornaam = user.Voornaam;
             this.Achternaam = user.Achternaam;
             this.Email = user.Email;
             this.Login = user.Login;
-            //this.Roles = user.Roles;
-            //foreach (var userRole in user.Roles)
-            //{
-            //    var checkUserRole =
-            //        this.Roles.ToList().Find(r => r.Id == userRole.RoleId);
-            //    this.Role = checkUserRole;
-            //}
-
+            this.User = user;
+            this.Departement = user.Departement;
         }
 
         [Display(Name = "Voornaam")]
@@ -189,7 +192,25 @@ namespace uuregistration.Models
         [Required]
         public string Email { get; set; }
         public string Role { get; set; }
-        public ICollection<IdentityUserRole> Roles { get; set; }
+        public string Password { get; set; }
+        public ApplicationUser GetUser()
+        {
+            var user = new ApplicationUser()
+            {
+                Login = this.Login,
+                Voornaam = this.Voornaam,
+                Achternaam = this.Achternaam,
+                Email = this.Email,
+                UserName = this.Login,
+                Departement = this.Departement
+            };
+            return user;
+        }
+        public ApplicationUser User { get; set; }
+        public Departement Departement { get; set; }
+        public List<ApplicationUser> Users { get; set; }
+        public List<Departement> Departments { get; set; }
+        public ICollection<IdentityRole> Roles { get; set; }
     }
 
 

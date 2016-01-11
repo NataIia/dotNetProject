@@ -1,10 +1,20 @@
-﻿@model IEnumerable<uuregistration.Models.ApplicationUser>
+﻿@model IEnumerable<uuregistration.Models.EditUserViewModel>
 
+@{
+    ViewBag.Title = "Index";
+}
+
+<div id="GebruikersList">
+    <!--partial view, changes with ajax-->
+    @Html.Partial("../Gebruikers/GebruikersLijstControl")
+</div>
+
+<h2>Index</h2>
+<p>
+    @Html.ActionLink("Create New", "Register")
+</p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Login)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.Voornaam)
         </th>
@@ -15,16 +25,13 @@
             @Html.DisplayNameFor(model => model.Email)
         </th>
         <th>
-            <!--Html.DisplayNameFor(model => model.)-->
+           @Html.DisplayNameFor(model => model.Role)
         </th>
         <th></th>
     </tr>
     @foreach (var item in Model)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Login)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Voornaam)
             </td>
@@ -35,7 +42,7 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                <!--Html.DisplayFor(modelItem => item.Roles.First)-->
+                @Html.DisplayFor(modelItem => item.Role)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Login }) |
@@ -45,3 +52,4 @@
         </tr>
     }
 </table>
+

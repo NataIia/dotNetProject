@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using uuregistration.Models;
 using System.Collections.Generic;
+using uuregistration.ViewModels;
 
 namespace uuregistration.Controllers
 {
@@ -155,24 +156,27 @@ namespace uuregistration.Controllers
             if (ModelState.IsValid)
             {
                 var user = model.GetUser();
+                bool sucess1 = idManager.CreateUser(user, model.Password);
                 bool success = idManager.AddUserToRole(user.Id, "Gebruiker");
                 if (!success) return View(model);
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                return RedirectToAction("Index", "Home");
+                //var result = await UserManager.CreateAsync(user, model.Password);
+                //if (result.Succeeded)
+                //{
+                //    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                //    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                //    // Send an email with this link
+                //    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                //    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                //    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    //                    return RedirectToAction("Index", "Home");
-                    //redirecting to a not standart Index method defined in AccountController.
-                    return RedirectToAction("Index", "Account");
-                }
-                AddErrors(result);
+                //    //                    return RedirectToAction("Index", "Home");
+                //    //redirecting to a not standart Index method defined in AccountController.
+                //    return RedirectToAction("Index", "Account");
+                //}
+                //AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
@@ -494,15 +498,7 @@ namespace uuregistration.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-            var Db = new ApplicationDbContext();
-            var users = Db.Users;
-            var model = new List<EditUserViewModel>();
-            foreach (var user in users)
-            {
-                var u = new EditUserViewModel(user);
-                model.Add(u);
-            }
-            return View(model);
+            return View(new EditUserViewModel());
         }
 
         [Authorize(Roles = "Administrator")]
@@ -524,7 +520,7 @@ namespace uuregistration.Controllers
             if (ModelState.IsValid)
             {
                 var Db = new ApplicationDbContext();
-                var user = Db.Users.First(u => u.Voornaam == model.Voornaam);
+                var user = Db.Users.First(u => u.Login == model.Login);
                 // Update the user data:
                 user.Voornaam = model.Voornaam;
                 user.Achternaam = model.Achternaam;
@@ -584,7 +580,7 @@ namespace uuregistration.Controllers
             {
                 var idManager = new IdentityManager();
                 var Db = new ApplicationDbContext();
-                var user = Db.Users.First(u => u.Achternaam == model.Achternaam);
+                var user = Db.Users.First(u => u.Login == model.Login);
                 idManager.ClearUserRoles(user.Id);
                 foreach (var role in model.Roles)
                 {
@@ -597,5 +593,43 @@ namespace uuregistration.Controllers
             }
             return View();
         }
-    }
+
+        /// <summary>
+        /// De Index_Create functie wordt opgeroepen via AJAX en zal een PartialViewResult teruggeven
+        /// </summary>
+        /// <param name="viewmodel">De AJAX call zal het model van de view (GebruikersIndexViewModel) meegeven als parameter.
+        /// Hieruit wordt dan de nieuwe persoon gehaald via zijn property en aan de peopleService gegeven om op te slaan in de 
+        /// databank (via de Add functie)</param>
+        /// <returns>De lijst van alle personen (PartialView) opgevraagd via de peopleService</returns>
+        [HttpPost]
+        public PartialViewResult Index_Create(EditUserViewModel model)
+        {
+            var idManager = new IdentityManager();
+
+            if (ModelState.IsValid)
+            {
+                var user = model.GetUser();
+                bool success1 = idManager.CreateUser(user, "GroeptT@2015");
+
+                bool success2 = idManager.AddUserToRole(user.Id, "Gebruiker");
+                if (!success2) return PartialView("GebruikersLijstControl", model.Users);
+                var result = UserManager.CreateAsync(user, "");
+            }
+
+            // If we got this far, something failed, redisplay form
+            return PartialView("GebruikersLijstControl");
+        }
+
+            //    if (ModelState.IsValid)
+            //    {
+            //        if (!string.IsNullOrEmpty(viewmodel.Gebruiker.Voornaam))
+            //        {
+            //            gebruikersService.InsertOrUpdate(viewmodel.Gebruiker);
+            //            gebruikersService.SaveChanges();
+            //        }
+            //        return PartialView("GebruikersLijstControl", gebruikersService.GetAllGebruikers());
+            //    }
+            //    return PartialView("GebruikersLijstControl");
+            //}
+        }
 }
