@@ -237,9 +237,11 @@
     <Compile Include="Repositories\IFacturenRepository.cs" />
     <Compile Include="Repositories\IGebruikersRepository.cs" />
     <Compile Include="Repositories\IKlantenRepository.cs" />
+    <Compile Include="Repositories\IUurRegistratieDetailsRepository.cs" />
     <Compile Include="Repositories\IUurRegistratieRepository.cs" />
     <Compile Include="Repositories\KlantenRepository.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
+    <Compile Include="Repositories\UurRegistratieDetailsRepository.cs" />
     <Compile Include="Repositories\UurRegistratieRepository.cs" />
     <Compile Include="Resources\Resource.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -259,14 +261,17 @@
     <Compile Include="Services\IFacturenService.cs" />
     <Compile Include="Services\IGebruikersService.cs" />
     <Compile Include="Services\IKlantenService.cs" />
+    <Compile Include="Services\IUurRegistratieDetailsService.cs" />
     <Compile Include="Services\IUurRegistratieService.cs" />
     <Compile Include="Services\KlantenService.cs" />
+    <Compile Include="Services\UurRegistratieDetailsService.cs" />
     <Compile Include="Services\UurRegistratieService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\FacturenIndexViewModel.cs" />
     <Compile Include="ViewModels\GebruikersIndexViewModel.cs" />
     <Compile Include="ViewModels\KlantenIndexViewModel.cs" />
     <Compile Include="ViewModels\RoleViewModel.cs" />
+    <Compile Include="ViewModels\UurRegistratieDetailsViewModel.cs" />
     <Compile Include="ViewModels\UurRegistratieViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -274,7 +279,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\images\header-bg.jpg" />
     <Content Include="Content\my2style.css" />
-    <Content Include="Content\MyStyle.css" />
     <Content Include="Content\images\pic01.jpg" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />

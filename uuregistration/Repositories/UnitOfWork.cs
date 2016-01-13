@@ -15,6 +15,7 @@ namespace uuregistration.Repositories
         private UurRegistratieRepository uurRegistratieRepository;
         private FacturenRepository facturenRepository;
         private DepartementenRepository departementenRepository;
+        private UurRegistratieDetailsRepository uurRegistratieDetailsRepository;
 
         public UnitOfWork()
         {
@@ -51,6 +52,15 @@ namespace uuregistration.Repositories
                 return uurRegistratieRepository;
             }
             private set { uurRegistratieRepository = value; }
+        }
+        public UurRegistratieDetailsRepository UurRegistratieDetailsRepository
+        {
+            get
+            {
+                if (uurRegistratieDetailsRepository == null) { uurRegistratieDetailsRepository = new UurRegistratieDetailsRepository(context); }
+                return uurRegistratieDetailsRepository;
+            }
+            private set { uurRegistratieDetailsRepository = value; }
         }
         public FacturenRepository FacturenRepository
         {

@@ -266,6 +266,9 @@
 
 	.title
 	{
+        background: #111111 url(images/pic01.jpg) no-repeat center;
+        background-size: inherit;
+        height: 500px;
 		margin-bottom: 3em;
 	}
 	

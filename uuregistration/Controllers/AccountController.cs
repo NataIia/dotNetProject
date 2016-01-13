@@ -609,7 +609,7 @@ namespace uuregistration.Controllers
             if (ModelState.IsValid)
             {
                 var user = model.GetUser();
-                bool success1 = idManager.CreateUser(user, "GroeptT@2015");
+                bool success1 = idManager.CreateUser(user, model.Password);
 
                 bool success2 = idManager.AddUserToRole(user.Id, "Gebruiker");
                 if (!success2) return PartialView("GebruikersLijstControl", model.Users);
@@ -619,17 +619,5 @@ namespace uuregistration.Controllers
             // If we got this far, something failed, redisplay form
             return PartialView("GebruikersLijstControl");
         }
-
-            //    if (ModelState.IsValid)
-            //    {
-            //        if (!string.IsNullOrEmpty(viewmodel.Gebruiker.Voornaam))
-            //        {
-            //            gebruikersService.InsertOrUpdate(viewmodel.Gebruiker);
-            //            gebruikersService.SaveChanges();
-            //        }
-            //        return PartialView("GebruikersLijstControl", gebruikersService.GetAllGebruikers());
-            //    }
-            //    return PartialView("GebruikersLijstControl");
-            //}
-        }
+     }
 }

@@ -6,7 +6,6 @@ using uuregistration.Models;
 namespace uuregistration.DataAccessLayer
 {
     public class UuregistratieContext : DbContext
-        //IdentityDbContext<ApplicationUser>
     {
         public UuregistratieContext() : base() { }
 
