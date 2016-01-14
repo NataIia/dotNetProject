@@ -20,7 +20,8 @@ namespace uuregistration
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             UnityConfig.RegisterComponents();
-            Database.SetInitializer<UuregistratieContext>(new UuregistratieInitialiser());
+            UuregistratieInitialiser ui = new UuregistratieInitialiser();
+            Database.SetInitializer<UuregistratieContext>(ui);
         }
     }
 }

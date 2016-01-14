@@ -1,22 +1,28 @@
-﻿@model IEnumerable<uuregistration.Models.ApplicationUser>
+﻿@model uuregistration.Models.AllUsersViewModel
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Login)
+            @Html.DisplayNameFor(model => model.User.Login)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Voornaam)
+            @Html.DisplayNameFor(model => model.User.Voornaam)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Achternaam)
+            @Html.DisplayNameFor(model => model.User.Achternaam)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => model.User.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Departement)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.RoleView)
         </th>
         <th></th>
     </tr>
-    @foreach (var item in Model)
+    @foreach (var item in Model.GetAllUsersView)
     {
         <tr>
             <td>
@@ -31,6 +37,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
+            <th>
+                @Html.DisplayFor(model => item.Departement.departementCode)
+            </th>
+            <th>
+                @Html.DisplayFor(model => item.Roles)
+            </th>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Login }) |
                 @Html.ActionLink("Roles", "UserRoles", new { id = item.Login }) |

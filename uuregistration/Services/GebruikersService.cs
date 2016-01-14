@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using uuregistration.DataAccessLayer;
 using uuregistration.Models;
 using uuregistration.Repositories;
 
@@ -49,9 +50,14 @@ namespace uuregistration.Services
             ApplicationUser applicationUser = null;
             foreach (ApplicationUser user in uow.GebruikerRepository.All.ToList<ApplicationUser>())
             {
-                if (user.Login == gebruikerNaam) applicationUser = user;
+                if (user.Email == gebruikerNaam) applicationUser = user;
             }
             return applicationUser.DepartementId ?? default(int);
+        }
+
+        public UuregistratieContext GetContext()
+        {
+            return uow.Context;
         }
     }
 }

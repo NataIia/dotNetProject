@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using uuregistration.DataAccessLayer;
 using uuregistration.Services;
 
 namespace uuregistration.Models
@@ -164,11 +165,17 @@ namespace uuregistration.Models
     {
         public EditUserViewModel()
         {
-            var Db = new ApplicationDbContext();
+            this.Context = new UuregistratieContext();
+            this.Users = Context.Users.ToList<ApplicationUser>();
+            this.Roles = Context.Roles.ToList<IdentityRole>();
+            this.Departments = Context.Departements.ToList<Departement>();
+        }
+        public EditUserViewModel(UuregistratieContext context)
+        {
+            var Db = context;
             this.Users = Db.Users.ToList<ApplicationUser>();
             this.Roles = Db.Roles.ToList<IdentityRole>();
-            DepartementenService ds = new DepartementenService();
-            Departments = ds.GetAllDepartementen();
+            this.Departments = Db.Departements.ToList<Departement>();
         }
 
         // Allow Initialization with an instance of ApplicationUser:
@@ -191,7 +198,7 @@ namespace uuregistration.Models
 
         [Required]
         public string Email { get; set; }
-        public string Role { get; set; }
+        public IdentityUserRole Role { get; set; }
         public string Password { get; set; }
         public ApplicationUser GetUser()
         {
@@ -203,9 +210,8 @@ namespace uuregistration.Models
                 Achternaam = this.Achternaam,
                 Email = this.Email,
                 UserName = this.Login,
- //               Departement = dep
+                Departement = dep
             };
-            user.DepartementId = dep.DepartementId;
             return user;
         }
         public ApplicationUser User { get; set; }
@@ -213,8 +219,34 @@ namespace uuregistration.Models
         public List<ApplicationUser> Users { get; set; }
         public List<Departement> Departments { get; set; }
         public ICollection<IdentityRole> Roles { get; set; }
+        [Display(Name = "Gebruiker Role")]
+        public SelectRoleEditorViewModel RoleView { get; set; }
+        public UuregistratieContext Context { get; set; }
     }
 
+    public class AllUsersViewModel
+    {        
+        public List<EditUserViewModel> GetAllUsersView { get; set; }
+        public EditUserViewModel User { get; set; }
+
+        public UuregistratieContext Context { get; set; }
+
+        public AllUsersViewModel()
+        {
+            var Db = new UuregistratieContext();
+            Context = Db;
+            GetAllUsersView = new List<EditUserViewModel>();
+            Db.Users.ToList<ApplicationUser>().ForEach(u => GetAllUsersView.Add(new EditUserViewModel(u)));
+            User = new EditUserViewModel(Context);
+
+        }
+        public AllUsersViewModel(ApplicationUser user) : this()
+        {
+            User = new EditUserViewModel(user);
+        }
+
+
+    }
 
     public class SelectUserRolesViewModel
     {

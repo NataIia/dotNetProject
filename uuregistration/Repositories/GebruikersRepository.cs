@@ -25,13 +25,13 @@ namespace uuregistration.Repositories
         {
             get
             {
-                return context.Gebruikers;
+                return context.Users;
             }
         }
 
         public IQueryable<ApplicationUser> AllIncluding(params Expression<Func<ApplicationUser, object>>[] includeProperties)
         {
-            IQueryable<ApplicationUser> query = context.Gebruikers;
+            IQueryable<ApplicationUser> query = context.Users;
             foreach (var includeProperty in includeProperties)
             {
                 query = query.Include(includeProperty);
@@ -41,8 +41,8 @@ namespace uuregistration.Repositories
 
         public void Delete(int id)
         {
-            var gebruiker = context.Gebruikers.Find(id);
-            context.Gebruikers.Remove(gebruiker);
+            var gebruiker = context.Users.Find(id);
+            context.Users.Remove(gebruiker);
         }
 
         public void Dispose()
@@ -52,14 +52,16 @@ namespace uuregistration.Repositories
 
         public ApplicationUser Find(String id)
         {
-            return context.Gebruikers.Find(id);
+            return context.Users.Find(id);
         }
 
         public void InsertOrUpdate(ApplicationUser gebruiker)
         {
             Boolean exist = false;
 
-            foreach (ApplicationUser g in context.Gebruikers.ToList<ApplicationUser>())
+            var idManager = new IdentityManager();
+
+            foreach (ApplicationUser g in context.Users)
             {
                 if (g.Id == gebruiker.Id)
                 {
@@ -69,8 +71,9 @@ namespace uuregistration.Repositories
 
             if (!exist)
             {
-//                gebruiker.UpdateRecords.Add(new Update(null, Update.Type.GREATION, "new gebruiker"));
-                context.Gebruikers.Add(gebruiker);
+                //gebruiker.UpdateRecords.Add(new Update(null, Update.Type.GREATION, "new gebruiker"));
+                bool sucess1 = idManager.CreateUser(gebruiker, "Groept@2015", context);
+                bool success2 = idManager.AddUserToRole(gebruiker.Id, "Gebruiker", context);
             } //new gebruiker
             else
             {

@@ -1,5 +1,4 @@
-﻿@model uuregistration.Models.Factuur
-
+﻿@model uuregistration.ViewModels.FacturenIndexViewModel
 @{
     ViewBag.Title = "Edit";
 }
@@ -14,37 +13,37 @@
         <h4>Factuur</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.Factuur.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FactuurJaar, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Factuur.FactuurJaar, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FactuurJaar, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FactuurJaar, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Factuur.FactuurJaar, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Factuur.FactuurJaar, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FactuurNummer, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Factuur.FactuurNummer, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FactuurNummer, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FactuurNummer, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Factuur.FactuurNummer, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Factuur.FactuurNummer, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FactuurDatum, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Factuur.FactuurDatum, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FactuurDatum, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FactuurDatum, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Factuur.FactuurDatum, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Factuur.FactuurDatum, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Totaal, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Factuur.Totaal, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Totaal, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Totaal, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Factuur.Totaal, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Factuur.Totaal, "", new { @class = "text-danger" })
             </div>
         </div>
 

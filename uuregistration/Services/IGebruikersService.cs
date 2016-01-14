@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using uuregistration.DataAccessLayer;
 using uuregistration.Models;
 
 namespace uuregistration.Services
@@ -20,5 +21,6 @@ namespace uuregistration.Services
         void InsertOrUpdate(ApplicationUser gebruiker);
         void SaveChanges();
         void Delete(int id);
+        UuregistratieContext GetContext();
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
 using uuregistration.Repositories;
+using uuregistration.DataAccessLayer;
 
 namespace uuregistration.Models
 {
@@ -48,45 +49,45 @@ namespace uuregistration.Models
 
     public class IdentityManager
     {
-        public bool RoleExists(string name)
+        public bool RoleExists(string name, UuregistratieContext context)
         {
             var rm = new RoleManager<IdentityRole>(
-                new RoleStore<IdentityRole>(new ApplicationDbContext()));
+                new RoleStore<IdentityRole>(context));
             return rm.RoleExists(name);
         }
 
 
-        public bool CreateRole(string name)
+        public bool CreateRole(string name, UuregistratieContext context)
         {
             var rm = new RoleManager<IdentityRole>(
-                new RoleStore<IdentityRole>(new ApplicationDbContext()));
+                new RoleStore<IdentityRole>(context));
             var idResult = rm.Create(new IdentityRole(name));
             return idResult.Succeeded;
         }
 
 
-        public bool CreateUser(ApplicationUser user, string password)
+        public bool CreateUser(ApplicationUser user, string password, UuregistratieContext context)
         {
             var um = new UserManager<ApplicationUser>(
-                new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                new UserStore<ApplicationUser>(context));
             var idResult = um.Create(user, password);
             return idResult.Succeeded;
         }
 
 
-        public bool AddUserToRole(string userId, string roleName)
+        public bool AddUserToRole(string userId, string roleName, UuregistratieContext context)
         {
             var um = new UserManager<ApplicationUser>(
-                new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                new UserStore<ApplicationUser>(context));
             var idResult = um.AddToRole(userId, roleName);
             return idResult.Succeeded;
         }
 
 
-        public void ClearUserRoles(string userId)
+        public void ClearUserRoles(string userId, UuregistratieContext context)
         {
             var um = new UserManager<ApplicationUser>(
-                new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                new UserStore<ApplicationUser>(context));
             var user = um.FindById(userId);
             var currentRoles = new List<IdentityUserRole>();
             currentRoles.AddRange(user.Roles);

@@ -14,7 +14,7 @@ namespace uuregistration.Models
         public string Postcode { get; set; }
         public string Plaats { get; set; }
         public int? GebruikerId { get; set; }
-        public virtual Gebruiker Gebruiker { get; set; }
+        public virtual ApplicationUser Gebruiker { get; set; }
         public List<Update> UpdateRecords { get; set; }
     }
 }

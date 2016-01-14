@@ -9,14 +9,14 @@ namespace uuregistration.Models
     {
         public enum Type {GREATION, UPDATE}
         public int Id { get; set; }
-        public Gebruiker Author { get; set; }
+        public ApplicationUser Author { get; set; }
         public DateTime UpdateTijd { get; set; }
         public Type UpdateType { get; set; }
         public string UpdateOmschrijving { get; set; }
 
         public Update(){}
 
-        public Update(Gebruiker author, Type type, string omschrijving)
+        public Update(ApplicationUser author, Type type, string omschrijving)
         {
             Author = author;
             UpdateType = type;

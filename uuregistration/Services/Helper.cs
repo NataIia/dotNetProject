@@ -18,7 +18,7 @@ namespace uuregistration.Services
         public static ApplicationUser GetUserByName(string name, UuregistratieContext context)
         {
             ApplicationUser applicationUser = null;
-            foreach (ApplicationUser user in context.Gebruikers)
+            foreach (ApplicationUser user in context.Users)
             {
                 if (user.Login == name) applicationUser = user;
             }

@@ -39,7 +39,7 @@ namespace uuregistration.Controllers
             }
             else if (User.IsInRole("DepartementAdministrator"))
             {
-                factuurIndexViewModel.Facturen = factuurService.GetAllFacturenByDepartement(gebruikerService.GetDepartementId(System.Web.HttpContext.Current.User.Identity.Name));
+                factuurIndexViewModel.Facturen = factuurService.GetAllFacturenByDepartement(did);
             }
             factuurIndexViewModel.Factuur = new Factuur();
             factuurIndexViewModel.Klanten = klantenService.GetAllKlanten();

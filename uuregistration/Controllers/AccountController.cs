@@ -11,6 +11,8 @@ using Microsoft.Owin.Security;
 using uuregistration.Models;
 using System.Collections.Generic;
 using uuregistration.ViewModels;
+using uuregistration.Services;
+using uuregistration.DataAccessLayer;
 
 namespace uuregistration.Controllers
 {
@@ -20,15 +22,24 @@ namespace uuregistration.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IGebruikersService gebruikersService;
+        private IDepartementenService departementenService;
 
         public AccountController()
         {
+            this.gebruikersService = new GebruikersService();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
+        }
+
+        public AccountController(IGebruikersService gebruikersService, IDepartementenService departementenService)
+        {
+            this.gebruikersService = gebruikersService;
+            this.departementenService = departementenService;
         }
 
         public ApplicationSignInManager SignInManager
@@ -156,27 +167,12 @@ namespace uuregistration.Controllers
             if (ModelState.IsValid)
             {
                 var user = model.GetUser();
-                bool sucess1 = idManager.CreateUser(user, model.Password);
-                bool success = idManager.AddUserToRole(user.Id, "Gebruiker");
+                UuregistratieContext urc = new UuregistratieContext();
+                bool sucess1 = idManager.CreateUser(user, model.Password, urc);
+                bool success = idManager.AddUserToRole(user.Id, "Gebruiker", urc);
                 if (!success) return View(model);
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 return RedirectToAction("Index", "Home");
-                //var result = await UserManager.CreateAsync(user, model.Password);
-                //if (result.Succeeded)
-                //{
-                //    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-
-                //    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                //    // Send an email with this link
-                //    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                //    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                //    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                //    //                    return RedirectToAction("Index", "Home");
-                //    //redirecting to a not standart Index method defined in AccountController.
-                //    return RedirectToAction("Index", "Account");
-                //}
-                //AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
@@ -498,7 +494,7 @@ namespace uuregistration.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-            return View(new EditUserViewModel());
+            return View(new AllUsersViewModel());
         }
 
         [Authorize(Roles = "Administrator")]
@@ -581,12 +577,12 @@ namespace uuregistration.Controllers
                 var idManager = new IdentityManager();
                 var Db = new ApplicationDbContext();
                 var user = Db.Users.First(u => u.Login == model.Login);
-                idManager.ClearUserRoles(user.Id);
+                idManager.ClearUserRoles(user.Id, gebruikersService.GetContext());
                 foreach (var role in model.Roles)
                 {
                     if (role.Selected)
                     {
-                        idManager.AddUserToRole(user.Id, role.RoleName);
+                        idManager.AddUserToRole(user.Id, role.RoleName, gebruikersService.GetContext());
                     }
                 }
                 return RedirectToAction("index");
@@ -602,17 +598,18 @@ namespace uuregistration.Controllers
         /// databank (via de Add functie)</param>
         /// <returns>De lijst van alle personen (PartialView) opgevraagd via de peopleService</returns>
         [HttpPost]
-        public PartialViewResult Index_Create(EditUserViewModel model)
+        public PartialViewResult Index_Create(AllUsersViewModel model)
         {
             var idManager = new IdentityManager();
 
             if (ModelState.IsValid)
             {
-                var user = model.GetUser();
-                bool success1 = idManager.CreateUser(user, model.Password);
+                var user = model.User.GetUser();
+                bool success1 = idManager.CreateUser(user, model.User.Password, model.Context);
 
-                bool success2 = idManager.AddUserToRole(user.Id, "Gebruiker");
-                if (!success2) return PartialView("GebruikersLijstControl", model.Users);
+
+                bool success2 = idManager.AddUserToRole(user.Id, "Gebruiker", model.Context);
+                if (!success2) return PartialView("GebruikersLijstControl", model.User.Users);
                 var result = UserManager.CreateAsync(user, "");
             }
 

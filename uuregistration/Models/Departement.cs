@@ -10,7 +10,7 @@ namespace uuregistration.Models
         public int DepartementId { get; set; }
         public string departementCode { get; set; }
         public string departementOmschrijving { get; set; }
-        public virtual ICollection<Gebruiker> Gebruikers { get; set; }
+        public virtual ICollection<ApplicationUser> Gebruikers { get; set; }
         public List<Update> UpdateRecords { get; set; }
     }
 }

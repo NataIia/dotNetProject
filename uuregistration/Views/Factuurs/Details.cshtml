@@ -1,5 +1,4 @@
-﻿@model uuregistration.Models.Factuur
-
+﻿@model uuregistration.ViewModels.FacturenIndexViewModel
 @{
     ViewBag.Title = "Details";
 }
@@ -11,40 +10,40 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.FactuurJaar)
+            @Html.DisplayNameFor(model => model.Factuur.FactuurJaar)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FactuurJaar)
+            @Html.DisplayFor(model => model.Factuur.FactuurJaar)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FactuurNummer)
+            @Html.DisplayNameFor(model => model.Factuur.FactuurNummer)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FactuurNummer)
+            @Html.DisplayFor(model => model.Factuur.FactuurNummer)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FactuurDatum)
+            @Html.DisplayNameFor(model => model.Factuur.FactuurDatum)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FactuurDatum)
+            @Html.DisplayFor(model => model.Factuur.FactuurDatum)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Totaal)
+            @Html.DisplayNameFor(model => model.Factuur.Totaal)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Totaal)
+            @Html.DisplayFor(model => model.Factuur.Totaal)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Factuur.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

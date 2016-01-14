@@ -17,6 +17,11 @@ namespace uuregistration.Models
         public float LijnNetto { get; set; }
         public List<Update> UpdateRecords { get; set; }
 
+        public FactuurDetails()
+        {
+
+        }
+
         public FactuurDetails(UurRegistratie uurRegistratie)
         {
             UurRegistratie = uurRegistratie;
