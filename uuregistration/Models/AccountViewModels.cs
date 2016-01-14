@@ -195,6 +195,7 @@ namespace uuregistration.Models
         public string Password { get; set; }
         public ApplicationUser GetUser()
         {
+            Departement dep = Departments.First(d => d.departementCode == Departement.departementCode);
             var user = new ApplicationUser()
             {
                 Login = this.Login,
@@ -202,8 +203,9 @@ namespace uuregistration.Models
                 Achternaam = this.Achternaam,
                 Email = this.Email,
                 UserName = this.Login,
-                Departement = this.Departement
+ //               Departement = dep
             };
+            user.DepartementId = dep.DepartementId;
             return user;
         }
         public ApplicationUser User { get; set; }

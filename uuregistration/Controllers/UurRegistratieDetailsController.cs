@@ -15,7 +15,12 @@ namespace uuregistration.Controllers
 {
     public class UurRegistratieDetailsController : Controller
     {
-        private UurRegistratieDetailsService uurRegistratieDetailsService;
+        private IUurRegistratieDetailsService uurRegistratieDetailsService;
+
+        public UurRegistratieDetailsController(IUurRegistratieDetailsService uurRegistratieDetailsService)
+        {
+            this.uurRegistratieDetailsService = uurRegistratieDetailsService;
+        }
 
         // GET: UurRegistratieDetails
         public ActionResult Index()
@@ -74,15 +79,15 @@ namespace uuregistration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,StartTijd,EindTijd,StartDate,EindDate,TypeWerk,TeFactureren")] UurRegistratieDetails uurRegistratieDetails)
-        {
+        public ActionResult Edit(UurRegistratieDetailsViewModel uurRegistratieDetailsViewModel)
+        {//[Bind(Include = "Id,StartTijd,EindTijd,StartDate,EindDate,TypeWerk,TeFactureren")]
             if (ModelState.IsValid)
             {
-                uurRegistratieDetailsService.InsertOrUpdateDetails(uurRegistratieDetails);
+                uurRegistratieDetailsService.InsertOrUpdateDetails(uurRegistratieDetailsViewModel.UurRegistratieDetail);
                 uurRegistratieDetailsService.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(uurRegistratieDetails);
+            return View(uurRegistratieDetailsViewModel);
         }
 
         // GET: UurRegistratieDetails/Delete/5

@@ -1,5 +1,4 @@
-﻿@model uuregistration.Models.UurRegistratieDetails
-
+﻿@model uuregistration.ViewModels.UurRegistratieDetailsViewModel
 @{
     ViewBag.Title = "Details";
 }
@@ -11,56 +10,56 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.StartTijd)
+            @Html.DisplayNameFor(model => model.UurRegistratieDetail.StartTijd)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.StartTijd)
+            @Html.DisplayFor(model => model.UurRegistratieDetail.StartTijd)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
+            @Html.DisplayNameFor(model => model.UurRegistratieDetail.StartDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.StartDate)
+            @Html.DisplayFor(model => model.UurRegistratieDetail.StartDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EindDate)
+            @Html.DisplayNameFor(model => model.UurRegistratieDetail.EindDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EindDate)
+            @Html.DisplayFor(model => model.UurRegistratieDetail.EindDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EindTijd)
+            @Html.DisplayNameFor(model => model.UurRegistratieDetail.EindTijd)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EindTijd)
+            @Html.DisplayFor(model => model.UurRegistratieDetail.EindTijd)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TypeWerk)
+            @Html.DisplayNameFor(model => model.UurRegistratieDetail.TypeWerk)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TypeWerk)
+            @Html.DisplayFor(model => model.UurRegistratieDetail.TypeWerk)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TeFactureren)
+            @Html.DisplayNameFor(model => model.UurRegistratieDetail.TeFactureren)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TeFactureren)
+            @Html.DisplayFor(model => model.UurRegistratieDetail.TeFactureren)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.UurRegistratieDetailsId }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UurRegistratieDetail.UurRegistratieDetailsId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

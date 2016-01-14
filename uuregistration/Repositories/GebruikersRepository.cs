@@ -81,6 +81,8 @@ namespace uuregistration.Repositories
 
         public void Save()
         {
+            //The member with identity ' ' does not exist in the metadata collection.\r\nParameter name: identity error
+            //context.Configuration.ValidateOnSaveEnabled = false;
             context.SaveChanges();
         }
     }
